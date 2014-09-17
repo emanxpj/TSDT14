@@ -1,0 +1,62 @@
+\documentclass{article}
+\usepackage{graphicx}
+
+\setlength{\topmargin}{-.5in}
+\setlength{\textheight}{9in}
+\setlength{\oddsidemargin}{.125in}
+\setlength{\textwidth}{6.25in}
+
+\begin{document}
+
+\author{Jens Edhammer & David Habrman}
+
+
+\begin{abstract}
+The abstract text goes here.
+\end{abstract}
+
+\newpage
+
+\section{Theory}
+
+\subsection{Prepatory tasks}
+Simple lowpass filter of first degree.
+
+\begin{equation}
+    \label{simplefilter}
+    H_1(f) = \frac{1}{1+\frac{jf}{f_c}}
+\end{equation}
+
+\begin{equation}
+    \label{highorderfilter}
+    H_2(f) \approx rect(\frac{f}{2f_c})
+\end{equation}
+
+\begin{equation}
+    \label{absh1}
+    |H_1(f)|^2 = \frac{1}{1+(\frac{f}{f_c})^2}
+\end{equation}
+\begin{equation}
+    \label{absh2}
+    |H_2(f)|^2 \approx rect(\frac{f}{2f_c})
+\end{equation}
+
+
+
+
+
+
+\subsection{Subsection Heading Here}
+Write your subsection text here.
+
+% \begin{figure}
+%     \centering
+%     \includegraphics[width=3.0in]{myfigure}
+%     \caption{Simulation Results}
+%     \label{simulationfigure}
+% \end{figure}
+
+\section{Conclusion}
+Write your conclusion here.
+
+\end{document}
