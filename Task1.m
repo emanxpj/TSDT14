@@ -9,30 +9,53 @@ Rx = 10;
 %fc är skärfrekvens
 
 H1 = 1./(1+j*f/fc);
-Ry1 = abs(H).^2 * Rx;
-ry1 = ifft(Ry1);
+Ry1 = abs(H1).^2 * Rx;
+ry1 = 1/0.01*ifft(Ry1); %fel med en faktor 2
 
 Ryt1 = Rx./(1+(f/fc).^2);
-ryt1 = Rx*2*pi*fc*exp(-2*pi*fc*t);
+ryt1 = Rx*pi*fc*exp(-2*pi*fc*abs(t));
 
 figure(1)
 subplot(221);
-title('Estimated PSD');
 plot(f,Ryt1);
-subplot(222)
-title('Estimated ACF');
-plot(t,ryt1);
+title('Theoreticall PSD');
+subplot(222);
+plot(t,ryt1); xlim([0,0.1]);
+title('Theoreticall ACF');
 
 subplot(223);
-title('Estimated PSD');
 plot(f,Ry1);
-subplot(224)
+title('Estimated PSD');
+subplot(224);
+plot(t,ry1); xlim([0,0.1]);
 title('Estimated ACF');
-plot(t,ry1);
 
 %%
 %Tio ordningens Butter H
 
-Wc = 2*pi*fc;
+%frekvens- och tidsvektor
+f = 0:0.01:99.99;
+t = 0:0.01:99.99;
+%PSD av vitt Gaussian brus
+Rx = 10;
 
+Wc = 2*pi*fc;
 [b,a] = butter(10,Wc,'s');
+
+Ry2 = abs(H2).^2 * Rx;
+ry2 = 400*ifft(Ry2);
+
+figure(2)
+subplot(221);
+plot(f,Ryt2);
+title('Theoreticall PSD');
+subplot(222);
+plot(t,ryt2); xlim([0,0.1]);
+title('Theoreticall ACF');
+
+subplot(223);
+plot(f,Ry2);
+title('Estimated PSD');
+subplot(224);
+plot(t,ry2); xlim([0,0.1]);
+title('Estimated ACF');
