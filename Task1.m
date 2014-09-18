@@ -42,7 +42,10 @@ Y = X.*H1;
 y = ifft(Y,'symmetric');
 plot(f,y);
 %%
-ry1 = BmanT(y,t);
+ry1 = EstimateACF(y,t,'Blett');
+ry1(1);
+
+
 
 figure(1)
 subplot(231);
