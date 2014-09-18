@@ -1,37 +1,67 @@
 %TSDT14 JENS OCH DAVID task1
+%% Jens Path
+cd ~/Programmering/TSDT14/
+%% 1st order lowpassfilter
+
+x=randn(2^16,1).';  
+%gaussian noise, if it has constant power it is white. The ACF rx[t1,t2]
+%for any t1 != t2, should be zero. rx(t1,t2)  = E[X(t1)X(t2)], these are
+%independent with mean zero. For t1 = t2, we get the variance, i.e. 1.
+%the power of the noise is thus 1. 
+
+Rx = 1;
+
 
 %frekvens- och tidsvektor
-f = 0:0.01:99;
-t = 0:0.01:99;
-%PSD av vitt Gaussian brus
-Rx = 10;
-%Simpelt lågpassfilter H(f) = 1/(1+jf/fc)
-%fc är skärfrekvens
+f = linspace(0,2^16,2^16);
+t = linspace(0,2^16,2^16);
+dt = 1;
+figure(2);
+plot(t,x)
+%PSD of white gaussian noise is a constant. We use 1 as an example, since
+%it leads to simple scalings with different Rx.
+
+%%
+
+%cutoff frequency fc
 fc = 10;
 
+%Basic lowpassfilter (1/(1+j*f/fc))
 H1 = 1./(1+1i*f/fc);
-Ry1 = abs(H1).^2 * Rx;
-dt = 0.01;
-ry1 = ifft(Ry1,'symmetric')/dt; %symmetric, due to real signal?
 
-
+%Theoretical functions. 
 Ryt1 = Rx./(1+(f/fc).^2);
 ryt1 = Rx*pi*fc*exp(-2*pi*fc*abs(t));
 
+%Estimated functions, should not use ifft, but a method instead, these are
+%simply placeholders.
+Ry1 = abs(H1).^2 * Rx;
+%ry1 = ifft(Ry1,'symmetric')/dt; %symmetric, due to real signal?
+X =fft(x); %X(f);
+Y = X.*H1;
+y = ifft(Y,'symmetric');
+plot(f,y);
+%%
+ry1 = BmanT(y,t,dt);
+ry1(1);
+
+
+
 figure(1)
 subplot(221);
-plot(f,Ryt1);
-title('Theoreticall PSD');
+plot(f,Ryt1); xlim([0,10]);
+title('Theoretical PSD');
 subplot(222);
-plot(t,ryt1); xlim([0,0.1]);
-title('Theoreticall ACF');
+stem(t,ryt1); xlim([-0.2,1.2]);
+title('Theoretical ACF');
 
 subplot(223);
 plot(f,Ry1);
 title('Estimated PSD');
 subplot(224);
-plot(t,ry1); xlim([0,0.1]);
+plot(t,ry1); xlim([0,1]);
 title('Estimated ACF');
+
 
 %%
 %Tio ordningens Butter H
@@ -39,26 +69,37 @@ title('Estimated ACF');
 %frekvens- och tidsvektor
 f = 0:0.01:99.99;
 t = 0:0.01:99.99;
+dt = 0.01;
 %PSD av vitt Gaussian brus
 Rx = 10;
+fc = 10;
 
 Wc = 2*pi*fc;
-[b,a] = butter(10,Wc,'s');
+[b,a] = butter(10,2*Wc,'s');
 
-Ry2 = abs(H2).^2 * Rx;
-ry2 = ifftshift(1/(0.01)*ifft(fftshift(Ry2)));
+Ry2 = (polyval(b,f)./polyval(a,f))* Rx;
+ry2 = ifft(Ry2,'symmetric')/dt;
+
+%Creating the rect
+x = linspace(0,99.99,10000);
+rect = zeros(size(x));
+rect(abs(x)<fc) = 1;
+
+
+Ryt2 = Rx.*rect;
+ryt2 = 2*fc*sinc(2*fc*t)*Rx;
 
 figure(2)
 subplot(221);
 plot(f,Ryt2);
-title('Theoreticall PSD');
+title('Theoretical PSD');
 subplot(222);
-plot(t,ryt2); xlim([0,0.1]);
-title('Theoreticall ACF');
+plot(t,ryt2); xlim([0,0.5]);
+title('Theoretical ACF');
 
 subplot(223);
 plot(f,Ry2);
 title('Estimated PSD');
 subplot(224);
-plot(t,ry2); xlim([0,0.1]);
+plot(t,ry2); xlim([0,0.5]);
 title('Estimated ACF');
