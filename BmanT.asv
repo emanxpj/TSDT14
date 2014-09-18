@@ -1,15 +1,18 @@
-function [ ryp ] = BmanT(x,k)
+function [ ryp ] = BmanT(x,k,dt)
 %Takes the signal x and returns the estimated ACF ryp at k with sample rate
 %dt.
 %   Estimation by Blackman-Tukey's method 
+
 N = max(size(x));
-ryp = zeros(1,N);
 s = 0;
-for k = 1:N
+for 
+if(abs(k) < N)
     for n = 1:(N-abs(k))
         s = s+x(n+abs(k))*x(n);
     end
-    ryp(k) = s;
+    ryp = s;
+else
+    ryp = 0;
 end
 end
 
