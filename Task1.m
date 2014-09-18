@@ -3,7 +3,7 @@
 cd ~/Programmering/TSDT14/
 %% 1st order lowpassfilter
 
-x=randn(2^16,1).';  
+x=randn(2^10,1).';  
 %gaussian noise, if it has constant power it is white. The ACF rx[t1,t2]
 %for any t1 != t2, should be zero. rx(t1,t2)  = E[X(t1)X(t2)], these are
 %independent with mean zero. For t1 = t2, we get the variance, i.e. 1.
@@ -13,8 +13,8 @@ Rx = 1;
 
 
 %frekvens- och tidsvektor
-f = linspace(0,2^16,2^16);
-t = linspace(0,2^16,2^16);
+f = linspace(0,2^10,2^10);
+t = linspace(0,2^10,2^10);
 dt = 1;
 figure(2);
 plot(t,x)
@@ -42,26 +42,28 @@ Y = X.*H1;
 y = ifft(Y,'symmetric');
 plot(f,y);
 %%
-ry1 = BmanT(y,t,dt);
-ry1(1);
-
-
+ry1 = BmanT(y,t);
 
 figure(1)
-subplot(221);
+subplot(231);
 plot(f,Ryt1); xlim([0,10]);
 title('Theoretical PSD');
-subplot(222);
-stem(t,ryt1); xlim([-0.2,1.2]);
+subplot(232);
+stem(t,ryt1); xlim([-0.2,20.2]);
+title('Theoretical ACF');
+subplot(233);
+plot(t,ryt1);
 title('Theoretical ACF');
 
-subplot(223);
+subplot(234);
 plot(f,Ry1);
 title('Estimated PSD');
-subplot(224);
-plot(t,ry1); xlim([0,1]);
+subplot(235);
+stem(t,ry1); xlim([-0.2,20.2]);
 title('Estimated ACF');
-
+subplot(236);
+plot(t,ry1);
+title('Estimated ACF');
 
 %%
 %Tio ordningens Butter H
