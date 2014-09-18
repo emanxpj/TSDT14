@@ -1,7 +1,6 @@
 function [ ryp ] = EstimateACF(x,k,type)
-%Takes the signal x and returns the estimated ACF ryp at k with sample rate
-%dt.
-%   Estimation by Blackman-Tukey's method 
+%Takes the signal x and returns the estimated ACF ryp at k
+%Estimation by Blackman-Tukey's  and Bartlett's method 
 N = max(size(x));
 ryp = zeros(1,N);
 s = 0;
