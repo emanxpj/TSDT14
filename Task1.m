@@ -3,7 +3,7 @@
 cd ~/Programmering/TSDT14/
 %% 1st order lowpassfilter
 
-x=randn(2^16,1).';  
+x=randn(1000,1).';  
 %gaussian noise, if it has constant power it is white. The ACF rx[t1,t2]
 %for any t1 != t2, should be zero. rx(t1,t2)  = E[X(t1)X(t2)], these are
 %independent with mean zero. For t1 = t2, we get the variance, i.e. 1.
@@ -13,8 +13,8 @@ Rx = 1;
 
 
 %frekvens- och tidsvektor
-f = linspace(0,2^16,2^16);
-t = linspace(0,2^16,2^16);
+f = linspace(0,1000,1000);
+t = linspace(0,1000,1000);
 dt = 1;
 figure(2);
 plot(t,x)
@@ -42,7 +42,7 @@ Y = X.*H1;
 y = ifft(Y,'symmetric');
 plot(f,y);
 %%
-ry1 = BmanT(y,t,dt);
+ry1 = EstimateACF(y,t,'Blett');
 ry1(1);
 
 
@@ -59,7 +59,7 @@ subplot(223);
 plot(f,Ry1);
 title('Estimated PSD');
 subplot(224);
-plot(t,ry1); xlim([0,1]);
+plot(t,ry1); xlim([0,1000]);
 title('Estimated ACF');
 
 
