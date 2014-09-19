@@ -13,7 +13,7 @@ for p = 1:k
         end
         Xf(c) = s;
     end
-    PerAv((p-1)*l+1:p*l)=mean(abs(Xf(c)).^2);
+    PerAv((p-1)*l+1:p*l)=mean(abs(Xf).^2);
 end
 end
 

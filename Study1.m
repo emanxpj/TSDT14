@@ -8,7 +8,7 @@ t = linspace(0,Ts,N);
 n = linspace(0,100,100);
 f = linspace(0,Ts,N);
 w = linspace(0,1,N);
-a = 0.9;
+a = 0.8;
 
 h1 = (1-a).*a.^n;
 H1 = (1-a)./(1-a*exp(-i*2*pi*w));
@@ -58,3 +58,15 @@ subplot(223)
 plot(w,Ryp)
 subplot(224)
 plot(w,RypAv)
+
+%%
+[b,a] = butter(10,0.5,'s');
+y2 = filter(b,a,x);
+
+ryp = EstimateACF(y, t, 'BmanT');
+subplot(235)
+plot(t,ryp); xlim([-0.1 0.5])
+
+ryp2 = EstimateACF(y, t, 'Blett');
+subplot(236)
+plot(t,ryp2); xlim([-0.1 0.5])
