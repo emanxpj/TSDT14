@@ -4,12 +4,12 @@ function [Ryp] = Periodogram(x)
 N = max(size(x));
 Xf = zeros(1,N);
 
-for k = 0:N-1
+for k = -N/2:N/2-1
     s = 0;
     for n = 0:N-1
         s = s + x(n+1)*exp(-1i*2*pi*k*n/N);
     end
-    Xf(k+1) = s; %The approximate fourier
+    Xf(k+1+N/2) = s; %The approximate fourier
 end
 Ryp = 1/(N)*abs(Xf).^2;
 end

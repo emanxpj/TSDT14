@@ -8,7 +8,7 @@ x = randn(1,N);
 
 n = linspace(0,N,N); 
 
-a = 0.9;
+a = 0.8;
 h1 = (1-a).*a.^n;
 
 y = filter(h1, 1,x);
@@ -16,26 +16,28 @@ y = filter(h1, 1,x);
 ryMy = EstimateACF(y,'BmanT');
 ryMy2 = EstimateACF(y,'Blett');
 ryt1 = zeros(1,N);
-ryt1(1) = (1-a)^2/(1-a^2);
+ryt1(N/2) = (1-a)^2/(1-a^2);
+
+stemT = linspace(-19,20,40);
+t = linspace(-N/2,N/2,N);
 
 figure(1); 
 subplot(321);
-plot(linspace(-length(ryt1)/2,length(ryt1)/2,length(ryt1)),ryt1); 
+plot(t,ryt1);xlim([-N/2 N/2]); 
 subplot(322);
-%stem(linspace(-19,20,40),ryt1(0:40));
+stem(stemT,ryt1(N/2 -19:N/2+20));
 subplot(323);
-plot(linspace(-length(ryMy)/2+1,length(ryMy)/2,length(ryMy)),ryMy);
+plot(t,ryMy);xlim([-N/2 N/2]);
 subplot(324);
-ryMy(N+1)
-stem(linspace(-19,20,40),ryMy(N-19:N+20));
+stem(stemT,ryMy(N/2-19:N/2+20));
 subplot(325);
-plot(n,ryMy2);
+plot(t,ryMy2);xlim([-N/2 N/2]);
 subplot(326);
-stem(linspace(0,20,20),ryMy2(1:20));
-%% 
+stem(stemT,ryMy2(N/2-19:N/2+20));
+
 %PDF estimation.
 
-w = linspace(0,1,N);
+w = linspace(-1/2,1/2,N);
 Rx = 1;
 RyMy1 = Periodogram(y);
 Ryt1 = Rx*abs((1-a)./(1-a*exp(-1i*2*pi*w))).^2;
@@ -47,6 +49,7 @@ subplot(222);
 plot(w,RyMy1);
 hold on;
 plot(w,Ryt1,'red');
+hold off;
 
 
 
