@@ -41,7 +41,7 @@ w = linspace(-1/2,1/2,N);
 Rx = 1;
 RyMy1 = Periodogram(y);
 Ryt1 = Rx*abs((1-a)./(1-a*exp(-1i*2*pi*w))).^2;
-RyMy2 = PerSmooth(x,5);
+RyMy2 = PerSmooth2(y,5);
 RyMy3 = PerAv(y,2^7);
 
 figure(2);
@@ -53,7 +53,7 @@ hold on;
 plot(w,Ryt1,'red');
 hold off;
 subplot(223);
-plot(w,RyMy2(1:2:end));
+plot(linspace(-1/2,1/2,N),RyMy2(1:end));
 hold on;
 plot(w,Ryt1,'red');
 hold off;
