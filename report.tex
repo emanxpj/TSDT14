@@ -25,21 +25,62 @@ Jens Edhammer \\ jened502, 920128-5112 }
 This is a laboration report in signal theory (TSDT14). It consists of three studies.
 
 \subsection{Study 1 – Modelling Signals}
- Study 1 involves analyzing the power spectral density (PSD) and auto correlation function (ACF) of noise filtered through two diffrent filters. One ideal- and one simple low pass filter.\\
+Study 1 involves analyzing the power spectral density (PSD) and auto correlation function (ACF)
+of noise filtered through two diffrent filters. One close to ideal and one simple low pass filter.
+The ACF and PSD were first theoretically calculated and then estimated.
+The ACF was estimated using Blackman-Tukey's- and Barlett's -estimate and the
+PDF was estimated using periodograms, averaged periodograms and smoothing.
 
-The ACF and PSD were first  theoretically calculated and then estimated. The ACF was estimated using Blackman-Tukey's- and Barlett's estimate and the PDF was estimated using periodograms, averaged periodograms and smoothing.
+\subsection{Notation}
+The following notations will be used. \\
+PSD - Power Spectral Density \\
+ACF - Auto correlation function \\
+$\hat{r}$ - Estimated function or value r. \\
+WGN - White Gaussian Noise
 
-\section{Method}
+\subsection{Method}
 
-White Gaussian noise is used in this study. It was filtered through the two filters 
+White Gaussian noise is used in this study. It was filtered through the two
+ filters described in equation~\ref{eq:simpleH} and equation~\ref{eq:idealH}.
+ The ideal filter is approximated by a highorder Butterworth lowpass filter.
 
 \begin{equation}
+  \label{eq:simpleH}
   H(\theta) =\frac{1-a}{1-ae^{-j2\pi\theta }}
 \end{equation}
 
 \begin{equation}
+  \label{eq:idealH}
   H(\theta) =rect(\frac{\theta}{\theta_0} )
 \end{equation}
+
+\subsubsection{Theoretical ACF and PSD}
+Noted in equation~\ref{eq:ACFsimple} is the functions for the ACF
+for the simple filter and equation~\ref{eq:ACFideal} for the close to ideal filter.
+Equation~\ref{eq:PSDsimple} does the same for the simple filter's PSD
+and equation~\ref{eq:PSDideal}, the close to ideal filter's PSD.
+$R_x$ is chosen to one due our WGN having a variance of one.
+
+\begin{equation}
+  \label{eq:ACFsimple}
+  ACF_{simple} = ryt1 = R_x\frac{(1-a)}{(1+a)}a^{|n|};  |a| < 1
+\end{equation}
+
+\begin{equation}
+  \label{eq:PSDsimple}
+  PSD_{simple} =  R_x|\frac{1-a}{1-ae^{-j2\pi\theta}}|^2;
+\end{equation}
+
+\begin{equation}
+  \label{eq:ACFideal}
+  ACF_{Ideal} = R_x\theta_{0}sinc(n\theta_0);
+\end{equation}
+
+\begin{equation}
+  \label{eq:PSDideal}
+  PSD_{Ideal} = R_xrect(\frac{\theta - k}{\theta_0})
+\end{equation}
+
 
 \section{Result and conclusion}
 
@@ -48,19 +89,6 @@ Jag har funnit att
 \item B\"arfrekvensen f\"or det \"onskade meddelandet var $f_c=...$
 \item ...
 \end{itemize}
-
 \clearpage
-
-\section*{Min Matlab-kod:}
-\begin{spverbatim}
-clear all
-close all
-
-for k=1:...
-  ...
-end
-
-plot(...,...)
-\end{spverbatim}
 
 \end{document}
