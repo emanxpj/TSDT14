@@ -1,4 +1,4 @@
-N = 2^10;
+N = 2^14;
 Ts = 1; %length of the measured signal.
 fs = N/Ts; %sampling frequency.
 T = Ts/N; %sampling length.
@@ -41,7 +41,7 @@ w = linspace(-1/2,1/2,N);
 Rx = 1;
 RyMy1 = Periodogram(y);
 Ryt1 = Rx*abs((1-a)./(1-a*exp(-1i*2*pi*w))).^2;
-RyMy2 = PerSmooth2(y,5);
+RyMy2 = PeriodFourier(y);
 RyMy3 = PerAv(y,2^7);
 
 figure(2);
