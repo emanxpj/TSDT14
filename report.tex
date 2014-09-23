@@ -3,6 +3,8 @@
 \usepackage{times}
 \usepackage{mathptmx}  
 \usepackage{spverbatim}
+\usepackage{amsmath}
+\usepackage{mathtools}
 
 \raggedbottom
 \sloppy
@@ -20,12 +22,24 @@ Jens Edhammer \\ jened502, 920128-5112 }
 \maketitle
 
 \section{Introduction}
+This is a laboration report in signal theory (TSDT14). It consists of three studies.
 
-Denna laboration gick ut p\aa\ att...
+\subsection{Study 1 – Modelling Signals}
+ Study 1 involves analyzing the power spectral density (PSD) and auto correlation function (ACF) of noise filtered through two diffrent filters. One ideal- and one simple low pass filter.\\
+
+The ACF and PSD were first  theoretically calculated and then estimated. The ACF was estimated using Blackman-Tukey's- and Barlett's estimate and the PDF was estimated using periodograms, averaged periodograms and smoothing.
 
 \section{Method}
 
-Jag gick tillv\"aga p\aa\ f\"oljande s\"att...
+White Gaussian noise is used in this study. It was filtered through the two filters 
+
+\begin{equation}
+  H(\theta) =\frac{1-a}{1-ae^{-j2\pi\theta }}
+\end{equation}
+
+\begin{equation}
+  H(\theta) =rect(\frac{\theta}{\theta_0} )
+\end{equation}
 
 \section{Result and conclusion}
 
