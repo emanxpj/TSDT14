@@ -1,62 +1,52 @@
-\documentclass{article}
-\usepackage{graphicx}
+\documentclass[10pt]{article}
 
-\setlength{\topmargin}{-.5in}
-\setlength{\textheight}{9in}
-\setlength{\oddsidemargin}{.125in}
-\setlength{\textwidth}{6.25in}
+\usepackage{times}
+\usepackage{mathptmx}  
+\usepackage{spverbatim}
+
+\raggedbottom
+\sloppy
+
+\title{Time-discrete Stochastic Signals\\
+\emph{TSDT14}}
+
+\author{David Habrman \\ davha227, 920908-2412\\
+Jens Edhammer \\ jened502, 920128-5112 }
+
+\date{\today}
 
 \begin{document}
 
-\author{Jens Edhammer & David Habrman}
+\maketitle
 
+\section{Introduction}
 
-\begin{abstract}
-The abstract text goes here.
-\end{abstract}
+Denna laboration gick ut p\aa\ att...
 
-\newpage
+\section{Method}
 
-\section{Theory}
+Jag gick tillv\"aga p\aa\ f\"oljande s\"att...
 
-\subsection{Prepatory tasks}
-Simple lowpass filter of first degree.
+\section{Result and conclusion}
 
-\begin{equation}
-    \label{simplefilter}
-    H_1(f) = \frac{1}{1+\frac{jf}{f_c}}
-\end{equation}
+Jag har funnit att
+\begin{itemize}
+\item B\"arfrekvensen f\"or det \"onskade meddelandet var $f_c=...$
+\item ...
+\end{itemize}
 
-\begin{equation}
-    \label{highorderfilter}
-    H_2(f) \approx rect(\frac{f}{2f_c})
-\end{equation}
+\clearpage
 
-\begin{equation}
-    \label{absh1}
-    |H_1(f)|^2 = \frac{1}{1+(\frac{f}{f_c})^2}
-\end{equation}
-\begin{equation}
-    \label{absh2}
-    |H_2(f)|^2 \approx rect(\frac{f}{2f_c})
-\end{equation}
+\section*{Min Matlab-kod:}
+\begin{spverbatim}
+clear all
+close all
 
+for k=1:...
+  ...
+end
 
-
-
-
-
-\subsection{Subsection Heading Here}
-Write your subsection text here.
-
-% \begin{figure}
-%     \centering
-%     \includegraphics[width=3.0in]{myfigure}
-%     \caption{Simulation Results}
-%     \label{simulationfigure}
-% \end{figure}
-
-\section{Conclusion}
-Write your conclusion here.
+plot(...,...)
+\end{spverbatim}
 
 \end{document}
