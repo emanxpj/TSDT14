@@ -9,8 +9,5 @@ PerAv = zeros(1,N);
 
 for p = 1:k
     PerAv((p-1)*l+1:p*l) = mean(y(l*(p-1)+1:p*l));
-
-
-
 end
 

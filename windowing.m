@@ -5,11 +5,12 @@ function [y] = windowing(x,n,method)
 switch method
     case 'square'
         w = ones(1,n)/n;
-        x1 = Periodogram(x)
-        x2 = cconv(w,x1,2*length(x1));
-        figure(19);
-        plot(cconv(w,x1,2*length(x1)))
-        y = x2(1:length(x))
+        x1 = Periodogram(x);
+        y = filter(w,1,x1);
+    case 'hamming'
+        w = hanning(n)/n;
+        x1 = Periodogram(x);
+        y = filter(w,1,x1);    
     case 'pure'
         y = PeriodFourier(x)
         
