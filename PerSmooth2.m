@@ -8,12 +8,6 @@ S = sinc(w*N).^2;
 plot(w,S);
 
 y = movingAverage(Periodogram(x),5);
-y = movingAverage(y,5);
-y = movingAverage(y,5);
-y = movingAverage(y,5);
-y = movingAverage(y,5);
-y = movingAverage(y,5);
-
 y2 = movingAverage(y,5);
 
 end
