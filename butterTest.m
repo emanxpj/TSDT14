@@ -47,12 +47,12 @@ RyMy1 = Periodogram(y);
 Ryt1 = zeros(1,N);
 Ryt1(abs(w) <a/2 ) = 1;
 w = linspace(0,1,N);
-RyMy2 = windowing(y,25,'square');
+RyMy2 = windowing2(ryMy2,65);
 RyMy3 = PerAv(y,2^7);
 
 Ryt1 = Ryt1([N/2+1:N 1:N/2]);
 RyMy1 = RyMy1([N/2+1:N 1:N/2]);
-RyMy2 = RyMy2([N/2+1:N 1:N/2]);
+%RyMy2 = RyMy2([N/2+1:N 1:N/2]);
 RyMy3 = RyMy3([N/2+1:N 1:N/2]);
 
 

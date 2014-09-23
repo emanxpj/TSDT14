@@ -48,15 +48,14 @@ RyMy1 = Periodogram(y);
 RyMy1 = RyMy1([N/2+1:N 1:N/2]);
 Ryt1 = Rx*abs((1-a)./(1-a*exp(-1i*2*pi*w))).^2;
 Ryt1 = Ryt1([N/2+1:N 1:N/2]);
-%RyMy2 = PeriodFourier(y);
+RyMy2 = PeriodFourier(y);
 %RyMy2 = smooth(Periodogram(y),0.1,'loess');
-RyMy2 = windowing(y,15,'square');
-RyMy2 = RyMy2([N/2+1:N 1:N/2]);
+%RyMy2 = windowing(y,15,'square');
+RyMy2 = windowing2(ryMy2,65);
 
 %RyMy2 = PeriodFourier(y);
 RyMy3 = PerAv(y,2^7);
 RyMy3 = RyMy3([N/2+1:N 1:N/2]);
-
 w = linspace(0,1,N);
 
 figure(2);
