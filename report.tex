@@ -5,6 +5,7 @@
 \usepackage{spverbatim}
 \usepackage{amsmath}
 \usepackage{mathtools}
+\usepackage{empheq}
 
 \raggedbottom
 \sloppy
@@ -38,7 +39,8 @@ ACF - Auto correlation function \\
 $\hat{r}$ - Estimated function or value r. \\
 WGN - White Gaussian Noise
 
-\subsection{Method}
+\section{Method}
+\subsection{Study 1 – Modelling Signals}
 
 White Gaussian noise is used in this study. It was filtered through the two
  filters described in equation~\ref{eq:simpleH} and equation~\ref{eq:idealH}.
@@ -55,11 +57,44 @@ White Gaussian noise is used in this study. It was filtered through the two
 \end{equation}
 
 \subsubsection{Theoretical ACF and PSD}
+PSD of WGN is constant and our WGN has a variance of one. Due to this the PSD of our input, $R_x$, is chosen to one.
+The PSD of the filtered WGN is then calculated using equation~\ref{eq:PSDformula}.
+
+\begin{equation}
+  \label{eq:PSDformula}
+  PSD[\theta] = R_x|H(\theta)|^2;
+\end{equation}
+
+Because the ACF is the inverse transformed PSD it can be calculated using equation~\ref{eq:ACFformula} where N is the number of samples.
+
+\begin{equation}
+  \label{eq:ACFformula}
+  ACF[n] = \frac{1}{N}\sum_{k=0}^{N-1}PSDe^{j2\pi kn/N}
+\end{equation}
+
+\subsubsection{Estimated ACF and PSD}
+The ACF was to be estimated using Blackman-Tukey's- and Barlett's -estimate. This was done using equation~\ref{eq:BmanT}
+
+\begin{equation}
+\label{eq:BmanT}
+ACF[k] = \begin{empheq}[right=\empheqrbrace]{align*}
+\frac{1}{N-|k|}\sum_{n=0}^{N-|k|-1}ACF[n+|k|]AXF[n], |k|<N \\
+0 elsewhere
+\end{empheq}
+\end{equation}
+
+
+
+The PDF was in turn to be estimated using periodograms, averaged periodograms and smoothing. 
+
+
+\section{Result and conclusion}
+\subsection{Study 1 – Modelling Signals}
+
 Noted in equation~\ref{eq:ACFsimple} is the functions for the ACF
 for the simple filter and equation~\ref{eq:ACFideal} for the close to ideal filter.
 Equation~\ref{eq:PSDsimple} does the same for the simple filter's PSD
 and equation~\ref{eq:PSDideal}, the close to ideal filter's PSD.
-$R_x$ is chosen to one due our WGN having a variance of one.
 
 \begin{equation}
   \label{eq:ACFsimple}
@@ -80,15 +115,6 @@ $R_x$ is chosen to one due our WGN having a variance of one.
   \label{eq:PSDideal}
   PSD_{Ideal} = R_xrect(\frac{\theta - k}{\theta_0})
 \end{equation}
-
-
-\section{Result and conclusion}
-
-Jag har funnit att
-\begin{itemize}
-\item B\"arfrekvensen f\"or det \"onskade meddelandet var $f_c=...$
-\item ...
-\end{itemize}
 \clearpage
 
 \end{document}
