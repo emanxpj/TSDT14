@@ -5,7 +5,6 @@
 \usepackage{spverbatim}
 \usepackage{amsmath}
 \usepackage{mathtools}
-\usepackage{empheq}
 
 \raggedbottom
 \sloppy
@@ -73,19 +72,42 @@ Because the ACF is the inverse transformed PSD it can be calculated using equati
 \end{equation}
 
 \subsubsection{Estimated ACF and PSD}
-The ACF was to be estimated using Blackman-Tukey's- and Barlett's -estimate. This was done using equation~\ref{eq:BmanT}
+The ACF was to be estimated using Blackman-Tukey's- and Barlett's -estimate. This was done using equation~\ref{eq:BmanT} resp. equation ~\ref{eq:Blett}.
 
 \begin{equation}
 \label{eq:BmanT}
-ACF[k] = \begin{empheq}[right=\empheqrbrace]{align*}
-\frac{1}{N-|k|}\sum_{n=0}^{N-|k|-1}ACF[n+|k|]AXF[n], |k|<N \\
-0 elsewhere
-\end{empheq}
+ACF[k] = \frac{1}{N-|k|}\sum_{n=0}^{N-|k|-1}ACF[n+|k|]ACF[n], |k|<N \\
+		0 elsewhere
+\end{equation}
+
+\begin{equation}
+\label{eq:Blett}
+ACF[k] = \frac{1}{N}\sum_{n=0}^{N-|k|-1}ACF[n+|k|]ACF[n], |k|<N \\
+		0 elsewhere
 \end{equation}
 
 
 
-The PDF was in turn to be estimated using periodograms, averaged periodograms and smoothing. 
+The PDF was in turn to be estimated using periodograms, averaged periodograms and smoothing. Periodograms was done using equation~\ref{eq:Peri}. Where $Y_N$, the filtered noise, was calculated using equation~\ref{eq:YN}.
+
+Averaged periodograms was done by calculating a mean of the periodogram inside an interval. The averaged periodogram was then set to the mean inside the interval.
+
+\begin{equation}
+\label{eq:Peri}
+PSD[\theta] = \frac{1}{N}|Y_n[\theta]|^2
+\end{equation}
+
+\begin{equation}
+\label{eq:YN}
+Y_N[\theta] = \sum_{n=0}^{N-1}y[n]e^{-j2\pi\theta n}
+\end{equation}
+
+Smoothing was done by convolving the periodogram with a lowpassfilter to get rid of high frequencies and thereby get a smoother estimate of the PSD.
+
+\begin{equation}
+\label{eq:Smooth}
+PSD[\theta] = \frac{1}{N}|Y_n[\theta]|^2
+\end{equation}
 
 
 \section{Result and conclusion}
