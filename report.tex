@@ -38,7 +38,8 @@ ACF - Auto correlation function \\
 $\hat{r}$ - Estimated function or value r. \\
 WGN - White Gaussian Noise
 
-\subsection{Method}
+\section{Method}
+\subsection{Study 1 – Modelling Signals}
 
 White Gaussian noise is used in this study. It was filtered through the two
  filters described in equation~\ref{eq:simpleH} and equation~\ref{eq:idealH}.
@@ -46,49 +47,88 @@ White Gaussian noise is used in this study. It was filtered through the two
 
 \begin{equation}
   \label{eq:simpleH}
-  H(\theta) =\frac{1-a}{1-ae^{-j2\pi\theta }}
+  H[\theta] =\frac{1-a}{1-ae^{-j2\pi\theta }}
 \end{equation}
 
 \begin{equation}
   \label{eq:idealH}
-  H(\theta) =rect(\frac{\theta}{\theta_0} )
+  H[\theta] =rect(\frac{\theta}{\theta_0} )
 \end{equation}
 
 \subsubsection{Theoretical ACF and PSD}
+PSD of WGN is constant and our WGN has a variance of one. Due to this the PSD of our noise, $R_x$, is chosen to one.
+The PSD of the filtered WGN is then calculated using equation~\ref{eq:PSDformula}.
+
+\begin{equation}
+  \label{eq:PSDformula}
+  R_y[\theta] = R_x|H(\theta)|^2;
+\end{equation}
+
+Because the ACF is the inverse transformed PSD it can be calculated using equation~\ref{eq:ACFformula} where N is the number of samples.
+
+\begin{equation}
+  \label{eq:ACFformula}
+  r_y[n] = \frac{1}{N}\sum_{k=0}^{N-1}R_ye^{j2\pi kn/N}
+\end{equation}
+
+\subsubsection{Estimated ACF and PSD}
+The ACF was to be estimated using Blackman-Tukey's- and Barlett's -estimate. This was done using equation~\ref{eq:BmanT} and equation ~\ref{eq:Blett}.
+
+\begin{equation}
+\label{eq:BmanT}
+\hat{r}_y[k] = \frac{1}{N-|k|}\sum_{n=0}^{N-|k|-1}r_x[n+|k|]r_x[n], |k|<N \\
+		0 elsewhere
+\end{equation}
+
+\begin{equation}
+\label{eq:Blett}
+\hat{r}_y[k] = \frac{1}{N}\sum_{n=0}^{N-|k|-1}r_x[n+|k|]r_x[n], |k|<N \\
+		0 elsewhere
+\end{equation}
+
+
+
+The PDF was in turn to be estimated using periodograms, averaged periodograms and smoothing. Periodograms was done using equation~\ref{eq:Peri}. Where $Y_N$, the filtered noise in the frequency domain, was calculated using equation~\ref{eq:YN}. Averaged periodograms was done by calculating a mean of the periodogram inside an interval and repeating this for all samples. The averaged periodogram was then set to the mean inside each  interval.
+
+\begin{equation}
+\label{eq:Peri}
+\hat{R}_y[\theta] = \frac{1}{N}|Y_n[\theta]|^2
+\end{equation}
+
+\begin{equation}
+\label{eq:YN}
+Y_N[\theta] = \sum_{n=0}^{N-1}y[n]e^{-j2\pi\theta n}
+\end{equation}
+
+Smoothing was done by convolving the periodogram with a lowpassfilter to get rid of high frequencies and thereby get a smoother estimate of the PSD.
+
+\section{Result and conclusion}
+\subsection{Study 1 – Modelling Signals}
+
 Noted in equation~\ref{eq:ACFsimple} is the functions for the ACF
 for the simple filter and equation~\ref{eq:ACFideal} for the close to ideal filter.
 Equation~\ref{eq:PSDsimple} does the same for the simple filter's PSD
 and equation~\ref{eq:PSDideal}, the close to ideal filter's PSD.
-$R_x$ is chosen to one due our WGN having a variance of one.
 
 \begin{equation}
   \label{eq:ACFsimple}
-  ACF_{simple} = ryt1 = R_x\frac{(1-a)}{(1+a)}a^{|n|};  |a| < 1
+  r_{y,simple} = ryt1 = R_x\frac{(1-a)}{(1+a)}a^{|n|};  |a| < 1
 \end{equation}
 
 \begin{equation}
   \label{eq:PSDsimple}
-  PSD_{simple} =  R_x|\frac{1-a}{1-ae^{-j2\pi\theta}}|^2;
+  R_{y,simple} =  R_x|\frac{1-a}{1-ae^{-j2\pi\theta}}|^2;
 \end{equation}
 
 \begin{equation}
   \label{eq:ACFideal}
-  ACF_{Ideal} = R_x\theta_{0}sinc(n\theta_0);
+  r_{y,Ideal} = R_x\theta_{0}sinc(n\theta_0);
 \end{equation}
 
 \begin{equation}
   \label{eq:PSDideal}
-  PSD_{Ideal} = R_xrect(\frac{\theta - k}{\theta_0})
+  R_{y,Ideal} = R_xrect(\frac{\theta - k}{\theta_0})
 \end{equation}
-
-
-\section{Result and conclusion}
-
-Jag har funnit att
-\begin{itemize}
-\item B\"arfrekvensen f\"or det \"onskade meddelandet var $f_c=...$
-\item ...
-\end{itemize}
 \clearpage
 
 \end{document}
