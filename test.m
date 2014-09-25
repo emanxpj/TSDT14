@@ -1,4 +1,4 @@
-N = 2^10;
+N = 2^13;
 Ts = 1; %length of the measured signal.
 fs = N/Ts; %sampling frequency.
 T = Ts/N; %sampling length.
@@ -44,18 +44,16 @@ stem(stemT,ryMy2(N/2-19:N/2+20));title('Bartlett Estimate of ACF');
 
 w = linspace(-1/2,1/2,N);
 Rx = 1;
-RyMy1 = Periodogram(y);
+
+RyMy1 = PeriodFourier(y);
 RyMy1 = RyMy1([N/2+1:N 1:N/2]);
+
 Ryt1 = Rx*abs((1-a)./(1-a*exp(-1i*2*pi*w))).^2;
 Ryt1 = Ryt1([N/2+1:N 1:N/2]);
-RyMy2 = PeriodFourier(y);
-%RyMy2 = smooth(Periodogram(y),0.1,'loess');
-%RyMy2 = windowing(y,15,'square');
+
 RyMy2 = windowing2(ryMy2,65);
 
-%RyMy2 = PeriodFourier(y);
-RyMy3 = PerAv(y,2^7);
-RyMy3 = RyMy3([N/2+1:N 1:N/2]);
+RyMy3 = PerAv(RyMy1,2^7);
 w = linspace(0,1,N);
 
 figure(2);

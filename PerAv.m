@@ -1,9 +1,9 @@
-function [ PerAv ] = PerAv(x,k)
+function [ PerAv ] = PerAv(perY,k)
 %UNTITLED4 Summary of this function goes here
 %   Detailed explanation goes here
-y = Periodogram(x);
+y = perY;
 
-N = max(size(x));
+N = max(size(y));
 l = N/k;
 PerAv = zeros(1,N);
 
