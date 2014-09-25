@@ -79,14 +79,21 @@ This was done using equation~\ref{eq:BmanT} and equation ~\ref{eq:Blett}.
 
 \begin{equation}
 \label{eq:BmanT}
-\hat{r}_y[k] = \frac{1}{N-|k|}\sum_{n=0}^{N-|k|-1}r_x[n+|k|]r_x[n], |k|<N \\
-		0 elsewhere
+\hat{r}_y[k] =
+\begin{cases}
+    \frac{1}{N-|k|}\sum_{n=0}^{N-|k|-1}r_x[n+|k|]r_x[n],& \text{if } |k|< N\\
+    0,              & \text{elsewhere}
+\end{cases}
 \end{equation}
+
 
 \begin{equation}
 \label{eq:Blett}
-\hat{r}_y[k] = \frac{1}{N}\sum_{n=0}^{N-|k|-1}r_x[n+|k|]r_x[n], |k|<N \\
-		0 elsewhere
+\hat{r}_y[k] =
+\begin{cases}
+    \frac{1}{N}\sum_{n=0}^{N-|k|-1}r_x[n+|k|]r_x[n],& \text{if } |k|< N\\
+    0,              & \text{elsewhere}
+\end{cases}
 \end{equation}
 
 
