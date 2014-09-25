@@ -116,21 +116,21 @@ The smoothed periodogram was done by first multiplying the estimated ACF with a
 
  \begin{equation}
  \label{eq:win}
- \hat{R}_{y,smoothed} = \mathcal{F}\{\hat{r}_y*w[k]\}
+ \hat{R}_{y,smoothed} = \mathcal{F}\{\hat{r}_yw[k]\}
  \end{equation}
 
 
 \section{Result and conclusion}
 \subsection{Study 1 – Modelling Signals}
 
-Noted in equation~\ref{eq:ACFsimple} is the functions for the ACF
+Noted in equation~\ref{eq:ACFsimple} is the theoretically calculated functions for the ACF
 for the simple filter and equation~\ref{eq:ACFideal} for the close to ideal filter.
 Equation~\ref{eq:PSDsimple} does the same for the simple filter's PSD
 and equation~\ref{eq:PSDideal}, the close to ideal filter's PSD.
 
 \begin{equation}
   \label{eq:ACFsimple}
-  r_{y,simple} = ryt1 = R_x\frac{(1-a)}{(1+a)}a^{|n|};  |a| < 1
+  r_{y,simple} = R_x\frac{(1-a)}{(1+a)}a^{|n|};  |a| < 1
 \end{equation}
 
 \begin{equation}
@@ -187,6 +187,16 @@ figure~\ref{fig:TheoPSDideal}
     \end{center}
 
 \end{figure}
+
+PDF estimations of the signal filtered through the simple filter are 
+shown in figure7 and figure8 while the estimations of the signal 
+filtered through the near ideal filter are shown in figure9 and 
+figure10.\\
+
+Insert pictures of PDF estimations for simple and ideal filter.\\
+
+Comment on PDF estimations\\
+
 
 \clearpage
 
