@@ -4,6 +4,11 @@
 \usepackage{mathptmx}
 \usepackage{amsmath}
 \usepackage{mathtools}
+\usepackage{graphicx}
+\usepackage{epstopdf}
+
+\setlength\parindent{0pt}
+
 
 \raggedbottom
 \sloppy
@@ -73,20 +78,29 @@ The ACF can be calculated using inverse fourier transform, see equation~\ref{eq:
   r_y[n] = \mathcal{F}^{-1}\{R_y\}[n]
 \end{equation}
 
+
+
 \subsubsection{Estimated ACF and PSD}
 The ACF was to be estimated using Blackman-Tukey's- and Barlett's -estimate.
 This was done using equation~\ref{eq:BmanT} and equation ~\ref{eq:Blett}.
 
 \begin{equation}
 \label{eq:BmanT}
-\hat{r}_y[k] = \frac{1}{N-|k|}\sum_{n=0}^{N-|k|-1}r_x[n+|k|]r_x[n], |k|<N \\
-		0 elsewhere
+\hat{r}_y[k] =
+\begin{cases}
+    \frac{1}{N-|k|}\sum_{n=0}^{N-|k|-1}r_x[n+|k|]r_x[n],& \text{if } |k|< N\\
+    0,              & \text{elsewhere}
+\end{cases}
 \end{equation}
+
 
 \begin{equation}
 \label{eq:Blett}
-\hat{r}_y[k] = \frac{1}{N}\sum_{n=0}^{N-|k|-1}r_x[n+|k|]r_x[n], |k|<N \\
-		0 elsewhere
+\hat{r}_y[k] =
+\begin{cases}
+    \frac{1}{N}\sum_{n=0}^{N-|k|-1}r_x[n+|k|]r_x[n],& \text{if } |k|< N\\
+    0,              & \text{elsewhere}
+\end{cases}
 \end{equation}
 
 The PSD was estimated using periodograms, averaged periodograms
@@ -95,11 +109,6 @@ of the estimated ACF.
 Averaged periodograms was done by calculating a mean of the periodogram inside
 an interval and repeating this for all samples. The averaged periodogram was
 then set to the mean inside each interval.
-
-% \begin{equation}
-% \label{eq:YN}
-% Y_N[\theta] = \sum_{n=0}^{N-1}y[n]e^{-j2\pi\theta n}
-% \end{equation}
 
 The smoothed periodogram was done by first multiplying the estimated ACF with a
  suitable window and then using the fourier transform to get the estimated PSD,
@@ -138,6 +147,47 @@ and equation~\ref{eq:PSDideal}, the close to ideal filter's PSD.
   \label{eq:PSDideal}
   R_{y,ideal} = R_xrect(\frac{\theta - k}{\theta_0})
 \end{equation}
+
+
+The theoretical functions for the ACF and PSD for $y_{simple}$ are presented
+in figure~\ref{fig:TheoACFsimple} and figure~\ref{fig:TheoPSDsimple}
+The functions for $y_{ideal}$ are presented in figure~\ref{fig:TheoACFideal} and
+figure~\ref{fig:TheoPSDideal}
+
+\begin{figure}
+  \label{fig:TheoACFsimple}
+    \begin{center}
+      \makebox[\textwidth]{\includegraphics[width=\textwidth]{TheoACF}}
+    \caption{Theoretical ACF of $y_{simple}$}
+    \end{center}
+\end{figure}
+
+\begin{figure}
+  \label{fig:TheoPSDsimple}
+    \begin{center}
+      \includegraphics[width=\textwidth]{TheoPSD}
+    \caption{Theoretical PSD of $y_{simple}$}
+    \end{center}
+
+\end{figure}
+
+\begin{figure}
+  \label{fig:TheoACFideal}
+    \begin{center}
+      \makebox[\textwidth]{\includegraphics[width=\textwidth]{BTheoACF}}
+    \caption{Theoretical ACF of $y_{ideal}$}
+    \end{center}
+\end{figure}
+
+\begin{figure}
+  \label{fig:TheoPSDideal}
+    \begin{center}
+      \includegraphics[width=\textwidth]{BTheoPSD}
+    \caption{Theoretical PSD of $y_{ideal}$}
+    \end{center}
+
+\end{figure}
+
 \clearpage
 
 \end{document}
