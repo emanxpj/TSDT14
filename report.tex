@@ -234,7 +234,12 @@ than Blackman-Turkey’s. \\
 PSD estimations of the signal filtered through the simple filter are
 shown in figure~\ref{fig:PSDest} and figure~\ref{fig:PSDSmooth} while the estimations of the signal
 filtered through the near ideal filter are shown in figure~\ref{fig:BPSDest} and
-figure~\ref{fig:BPSDSmooth}.
+figure~\ref{fig:BPSDSmooth}. The raw periodogram follows the shape of the theoretical
+PSD but it has a large variance. This variance was improved when using averaged periodogram,
+ as can be seen in figure~\ref{fig:PSDest} and figure~\ref{fig:BPSDest}.
+ However, this method sacrifices frequency resolution for a smaller variance.
+ When using smoothed periodogram the variance was small and no frequency
+ resolution sacrifices had to be made.
 
 
 \begin{figure}[!hp]
@@ -274,7 +279,6 @@ figure~\ref{fig:BPSDSmooth}.
 \end{figure}
 
 
-The raw periodogram follows the shape of the theoretical PSD but it has a large variance. This variance was improved when using averaged periodogram, as can be seen in figure~\ref{fig:PSDest} and figure~\ref{fig:BPSDest}. However, this method sacrifices frequency resolution for a smaller variance. When using smoothed periodogram the variance was small and no frequency resolution sacrifices had to be made.
 
 
 \clearpage
