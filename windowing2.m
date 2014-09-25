@@ -1,9 +1,8 @@
-function [y] = windowing2(acf, P)
+function [y] = windowing2(acf, P, w2)
 %WINDOWING2 Summary of this function goes here
 %   Detailed explanation goes here
 N = length(acf);
-
-w2 = window(@blackmanharris,P);
+%w2 = window(@blackmanharris,P);
 %w2 = window(@triang,P);
 
 w = zeros(1,N);
