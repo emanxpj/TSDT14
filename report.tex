@@ -154,101 +154,124 @@ in figure~\ref{fig:TheoACFsimple} and figure~\ref{fig:TheoPSDsimple}
 The functions for $y_{ideal}$ are presented in figure~\ref{fig:TheoACFideal} and
 figure~\ref{fig:TheoPSDideal}
 
-\begin{figure}
+
+
+\begin{figure}[!hp]
 
     \begin{center}
-      \makebox[\textwidth]{\includegraphics[width=\textwidth]{TheoACF}}
+      \includegraphics[width=0.6\textwidth]{TheoACF}
     \caption{Theoretical ACF of $y_{simple}$ \label{fig:TheoACFsimple}}
     \end{center}
 
 \end{figure}
 
-\begin{figure}
+\begin{figure}[!hp]
 
     \begin{center}
-      \includegraphics[width=\textwidth]{TheoPSD}
+      \includegraphics[width=0.6\textwidth]{TheoPSD}
     \caption{Theoretical PSD of $y_{simple}$ \label{fig:TheoPSDsimple}}
     \end{center}
 
 \end{figure}
 
-\begin{figure}
+\begin{figure}[!hp]
 
     \begin{center}
-      \makebox[\textwidth]{\includegraphics[width=\textwidth]{BTheoACF}}
+      \includegraphics[width=0.6\textwidth]{BTheoACF}
     \caption{Theoretical ACF of $y_{ideal}$ \label{fig:TheoACFideal}}
 
     \end{center}
 
 \end{figure}
 
-\begin{figure}
+\begin{figure}[!hp]
 
     \begin{center}
-      \includegraphics[width=\textwidth]{BTheoPSD}
+      \includegraphics[width=0.6\textwidth]{BTheoPSD}
     \caption{Theoretical PSD of $y_{ideal}$ \label{fig:TheoPSDideal}}
     \end{center}
 
 \end{figure}
 
+\clearpage
+
+\subsubsection{ACF estimation}
+
 ACF estimations, of the signal filtered through the simple filter, using Blackman-
-Turkey’s and Barlett’s-estimate are shown in figure5. The estimations of the signal
-filtered through the near ideal filter are shown in figure6.
-
-Insert pictures of ACF estimations for simple and ideal filter.\\
-
+Turkey’s and Barlett’s-estimate are shown in figure~\ref{fig:ACFest}. The estimations of the signal
+filtered through the near ideal filter are shown in figure~\ref{fig:BACFest}.
 By examining the pictures you see the difference between the theoretical ACF and
 the estimated ACF for both filters. The theoretical ACF tends to zero for higher k
-while both Blackman-Turkey’s and Barlett’s-estimate are non-zero for higher k. This i
+while both Blackman-Turkey’s and Barlett’s-estimate are non-zero for higher k. This is
 due to the fact that both Blackman-Turkey’s and Barlett’s-estimate have variances not
-tenting to zero for higher k. You can also see that Barlett’s estimate is slightly better
-than Blackman-Turkey’s.
+tending to zero for higher k. You can also see that Barlett’s estimate is slightly better
+than Blackman-Turkey’s. \\
+
+
+\begin{figure}[!hp]
+
+    \begin{center}
+      \includegraphics[width=0.6\textwidth]{EstACF}
+    \caption{Estimated ACF of $y_{simple}$ \label{fig:ACFest}}
+    \end{center}
+
+\end{figure}
+
+\begin{figure}[!hp]
+
+    \begin{center}
+      \includegraphics[width=0.6\textwidth]{BEstACF}
+    \caption{Estimated ACF of $y_{ideal}$ \label{fig:BACFest}}
+    \end{center}
+
+\end{figure}
+
+\clearpage
+
+\subsubsection{PSD estimation}
+
 
 PSD estimations of the signal filtered through the simple filter are
 shown in figure~\ref{fig:PSDest} and figure~\ref{fig:PSDSmooth} while the estimations of the signal
 filtered through the near ideal filter are shown in figure~\ref{fig:BPSDest} and
-figure~\ref{fig:BPSDSmooth}.\\
+figure~\ref{fig:BPSDSmooth}.
 
 
-\begin{figure}
+\begin{figure}[!hp]
 
     \begin{center}
-      \includegraphics[width=\textwidth]{Periodogram}
+      \includegraphics[width=0.6\textwidth]{Periodogram}
     \caption{Estimate PSD of $y_{simple}$ \label{fig:PSDest}}
     \end{center}
 
 \end{figure}
 
-\begin{figure}
+\begin{figure}[!hp]
 
     \begin{center}
-      \includegraphics[width=\textwidth]{Smoothed}
+      \includegraphics[width=0.6\textwidth]{Smoothed}
     \caption{Smoothed PSD of $y_{simple}$ \label{fig:PSDSmooth}}
     \end{center}
 
 \end{figure}
 
-\begin{figure}
+\begin{figure}[!hp]
 
     \begin{center}
-      \includegraphics[width=\textwidth]{BPeriodogram}
+      \includegraphics[width=0.6\textwidth]{BPeriodogram}
     \caption{Estimate PSD of $y_{ideal}$ \label{fig:BPSDest}}
     \end{center}
 
 \end{figure}
 
-\begin{figure}
+\begin{figure}[!hp]
 
     \begin{center}
-      \includegraphics[width=\textwidth]{BSmoothed}
+      \includegraphics[width=0.6\textwidth]{BSmoothed}
     \caption{Smoothed PSD of $y_{ideal}$ \label{fig:BPSDSmooth}}
     \end{center}
 
 \end{figure}
-
-
-Comment on PDF estimations\\
-
 
 \clearpage
 
