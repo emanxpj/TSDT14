@@ -79,13 +79,13 @@ This was done using equation~\ref{eq:BmanT} and equation ~\ref{eq:Blett}.
 
 \begin{equation}
 \label{eq:BmanT}
-\hat{r}_y[k] = \frac{1}{N-|k|}\sum_{n=0}^{N-|k|-1}r_x[n+|k|]r_x[n], |k|<N \\
+\hat{r}_y[k] = \frac{1}{N-|k|}\sum_{n=0}^{N-|k|-1}r_x[n+|k|]r_x[n], |k|<N
 		0 elsewhere
 \end{equation}
 
 \begin{equation}
 \label{eq:Blett}
-\hat{r}_y[k] = \frac{1}{N}\sum_{n=0}^{N-|k|-1}r_x[n+|k|]r_x[n], |k|<N \\
+\hat{r}_y[k] = \frac{1}{N}\sum_{n=0}^{N-|k|-1}r_x[n+|k|]r_x[n], |k|<N
 		0 elsewhere
 \end{equation}
 
@@ -113,14 +113,15 @@ The smoothed periodogram was done by first multiplying the estimated ACF with a
 
 \section{Result and conclusion}
 \subsection{Study 1 – Modelling Signals}
-Noted in equation~\ref{eq:ACFsimple} is the functions for the ACF
-for the simple filter and equation~\ref{eq:ACFideal} for the close to ideal filter.
+
+Noted in equation~\ref{eq:ACFsimple} is the theoretically calculated functions for the ACF
+for the simple filter and equation~\ref{eq:ACFideal} for the close to ideal filter. The functions are illustrated in figure1 and figure2.
 Equation~\ref{eq:PSDsimple} does the same for the simple filter's PSD
-and equation~\ref{eq:PSDideal}, the close to ideal filter's PSD.
+and equation~\ref{eq:PSDideal}, the close to ideal filter's PSD. These functions are illustrated in figure3 and figure4.
 
 \begin{equation}
   \label{eq:ACFsimple}
-  r_{y,simple} = ryt1 = R_x\frac{(1-a)}{(1+a)}a^{|n|};  |a| < 1
+  r_{y,simple} = R_x\frac{(1-a)}{(1+a)}a^{|n|};  |a| < 1
 \end{equation}
 
 \begin{equation}
@@ -137,6 +138,20 @@ and equation~\ref{eq:PSDideal}, the close to ideal filter's PSD.
   \label{eq:PSDideal}
   R_{y,ideal} = R_xrect(\frac{\theta - k}{\theta_0})
 \end{equation}
-\clearpage
+
+Insert pictures of theoretical ACF:s and PDF:s.\\
+
+ACF estimations, of the signal filtered through the simple filter, using Blackman-Turkey's and Barlett's-estimate are shown in figure5. The estimations of the signal filtered through the near ideal filter are shown in figure6.\\
+
+Insert pictures of ACF estimations for simple and ideal filter.\\
+
+Comment on estimations\\
+
+PDF estimations of the signal filtered through the simple filter are shown in figure7 and figure8 while the estimations of the signal filtered through the near ideal filter are shown in figure9 adn figure10.\\
+
+Insert pictures of PDF estimations for simple and ideal filter.\\
+
+Comment on estimations\\
+
 
 \end{document}
