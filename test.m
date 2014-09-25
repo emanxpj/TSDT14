@@ -1,4 +1,4 @@
-N = 2^13;
+N = 2^16;
 Ts = 1; %length of the measured signal.
 fs = N/Ts; %sampling frequency.
 T = Ts/N; %sampling length.
@@ -125,12 +125,16 @@ print -depsc TheoACF.eps
 figure(6)
 subplot(221);
 plot(t,ryMy);xlim([-N/2 N/2]); title('Blackman-Tukey Estimate of ACF');
+xlabel('k')
 subplot(222);
 stem(stemT,ryMy(N/2-19:N/2+20)); title('Blackman-Tukey Estimate of ACF');
+xlabel('k')
 subplot(223);
 plot(t,ryMy2);xlim([-N/2 N/2]); title('Bartlett Estimate of ACF');
+xlabel('k')
 subplot(224);
 stem(stemT,ryMy2(N/2-19:N/2+20));title('Bartlett Estimate of ACF');
+xlabel('k')
 print -depsc EstACF.eps
 
 figure(7)
