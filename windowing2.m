@@ -3,8 +3,8 @@ function [y] = windowing2(acf, P)
 %   Detailed explanation goes here
 N = length(acf);
 
-w2 = window(@triang,P);
-%w2 = window(@blackmanharris,P);
+w2 = window(@blackmanharris,P);
+%w2 = window(@triang,P);
 
 w = zeros(1,N);
 w(ceil((N-P)/2):floor((N+P)/2)) = w2;
