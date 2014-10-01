@@ -1,4 +1,4 @@
-N = 2^16;
+N = 2^10;
 N2 = N+1;
 Ts = 1; %length of the measured signal.
 fs = N/Ts; %sampling frequency.
@@ -57,6 +57,7 @@ RyMyTri = windowing2(ryMy2,65,w3);
 
 Ryt1 = Ryt1([N/2+1:N 1:N/2]);
 
+k = linspace(0,1,2^7);
 
 figure(2);
 subplot(221);
@@ -75,7 +76,7 @@ plot(w,Ryt1,'red');
 hold off;
 xlabel('[\theta]')
 subplot(224);
-plot(w,RyMy3); title('Averaged Periodogram with red theoretical overlay');
+plot(k,RyMy3); title('Averaged Periodogram with red theoretical overlay');
 hold on;
 plot(w,Ryt1,'red');
 hold off;
@@ -144,7 +145,7 @@ hold off;
 legend('Estimated','Theoretical')
 xlabel('\theta')
 subplot(122);
-plot(w,RyMy3); title('Averaged Periodogram');
+plot(k,RyMy3); title('Averaged Periodogram');
 xlabel('\theta')
 hold on;
 plot(w,Ryt1,'red');
