@@ -1,6 +1,6 @@
 function [ Ryp ] = PeriodFourier(x)
-%PERIODFOURIER Summary of this function goes here
-%   Detailed explanation goes here
+%PERIODFOURIER takes for example filtered signal
+%and outputs a raw periodogram. 
 
 N = max(size(x));
 %x = x.*hanning(length(x))';
