@@ -48,7 +48,6 @@ w3 = window(@triang,65);
 Rx = 1;
 
 RyMy1 = PeriodFourier(y);
-RyMy1 = RyMy1([N/2+1:N 1:N/2]);
 
 Ryt1 = Rx*abs((1-a)./(1-a*exp(-1i*2*pi*w))).^2;
 Ryt1 = Ryt1([N/2+1:N 1:N/2]);

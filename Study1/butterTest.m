@@ -39,7 +39,7 @@ stem(stemT,ryMy2(N/2-19:N/2+20)); title('Bartlett Estimate of ACF');
 
 
 
-%PDF estimation.
+%PSD estimation.
 
 w = linspace(-1/2,1/2,N);
 Rx = 1;
