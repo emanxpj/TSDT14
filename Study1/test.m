@@ -56,9 +56,12 @@ Ryt1 = Ryt1([N/2+1:N 1:N/2]);
 RyMy2 = windowing2(ryMy2,65,w2);
 RyMyTri = windowing2(ryMy2,65,w3);
 
-RyMy3 = PerAv(RyMy1,2^7);
-k = linspace(0,1,2^7);
+p = 2^5;
+
+k = linspace(0,1,N/p);
 w = linspace(0,1,N);
+
+RyMy3 = PerAv(y,p);
 
 figure(2);
 subplot(221);

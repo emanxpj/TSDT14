@@ -8,7 +8,7 @@ x = randn(1,N);
 
 
 n = linspace(0,N,N); 
-wc = 0.4;
+wc = 0.3;
 [b,a] = butter(10,wc,'low');
 
 y = filter(b,a,x);
@@ -45,6 +45,9 @@ w = linspace(-1/2,1/2,N);
 Rx = 1;
 RyMy1 = PeriodFourier(y);
 
+p = 2^7;
+
+
 RyMy1 = RyMy1([N/2+1:N 1:N/2]);
 Ryt1 = zeros(1,N);
 Ryt1(abs(w) <a/2 ) = 1;
@@ -52,12 +55,12 @@ w = linspace(0,1,N);
 w2 = window(@blackmanharris,65);
 w3 = window(@triang,65);
 RyMy2 = windowing2(ryMy2,65, w2);
-RyMy3 = PerAv(RyMy1,2^7);
+RyMy3 = PerAv(RyMy1,p);
 RyMyTri = windowing2(ryMy2,65,w3);
 
 Ryt1 = Ryt1([N/2+1:N 1:N/2]);
 
-k = linspace(0,1,2^7);
+k = linspace(0,1,N/p);
 
 figure(2);
 subplot(221);
