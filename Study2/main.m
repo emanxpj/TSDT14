@@ -54,37 +54,37 @@ plot(t,ZAM); title('Histogram of sq');
 %------------Periodogram----------------------
 w = linspace(0,1,N);
 
-Rypsq = PeriodFourier(zsq);
-Ryphw = PeriodFourier(zhw);
-Rypam = PeriodFourier(zam);
+RzPsq = PeriodFourier(zsq);
+RzPhw = PeriodFourier(zhw);
+RzPam = PeriodFourier(zam);
 
 figure(4);
 subplot(222);
-plot(w,Rypsq); title('Raw Periodogram of sq');
+plot(w,RzPsq); title('Raw Periodogram of sq');
 xlabel('[\theta]')
 subplot(223);
-plot(w,Ryphw);title('Raw Periodogram of hw');
+plot(w,RzPhw);title('Raw Periodogram of hw');
 xlabel('[\theta]')
 subplot(224);
-plot(w,Rypam); title('Raw Periodogram of am');
+plot(w,RzPam); title('Raw Periodogram of am');
 xlabel('[\theta]')
 %%
 %----------------PerAv-------------------------------
 k = linspace(0,1,2^7);
 
-RypAvsq = PerAv(Rypsq,2^7);
-RypAvhw = PerAv(Ryphw,2^7);
-RypAvam = PerAv(Rypam,2^7);
+RzAvsq = PerAv(RzPsq,2^7);
+RzAvhw = PerAv(RzPhw,2^7);
+RzAvam = PerAv(RzPam,2^7);
 
 figure(5);
 subplot(222);
-plot(k,RypAvsq); title('Averaged Periodogram of sq');
+plot(k,RzAvsq); title('Averaged Periodogram of sq');
 xlabel('[\theta]')
 subplot(223);
-plot(k,RypAvhw);title('Averaged Periodogram of hw');
+plot(k,RzAvhw);title('Averaged Periodogram of hw');
 xlabel('[\theta]')
 subplot(224);
-plot(k,RypAvam); title('Averaged Periodogram of am');
+plot(k,RzAvam); title('Averaged Periodogram of am');
 xlabel('[\theta]')
 
 %%
@@ -92,28 +92,28 @@ xlabel('[\theta]')
 w2 = window(@blackmanharris,65);
 w3 = window(@triang,65);
 
-rysq = EstimateACF(zsq,'Blett');
-ryhw = EstimateACF(zhw,'Blett');
-ryam = EstimateACF(zam,'Blett');
+rzsq = EstimateACF(zsq,'Blett');
+rzhw = EstimateACF(zhw,'Blett');
+rzam = EstimateACF(zam,'Blett');
 
-RypSsq = windowing2(rysq,65, w2);
-RypSsq = windowing2(rysq,65,w3);
+RzSsq = windowing2(rzsq,65, w2);
+RzSsq2 = windowing2(rzsq,65,w3);
 
-RypShw = windowing2(ryhw,65, w2);
-RypShw = windowing2(ryhw,65,w3);
+RzShw = windowing2(rzhw,65, w2);
+RzShw2 = windowing2(rzhw,65,w3);
 
-RypSam = windowing2(ryam,65, w2);
-RypSam = windowing2(ryam,65,w3);
+RzSam = windowing2(rzam,65, w2);
+RzSam2 = windowing2(rzam,65,w3);
 
 figure(6);
 subplot(222);
-plot(w,RypSsq); title('Smoothed Periodogram of sq');
+plot(w,RzSsq); title('Smoothed Periodogram of sq');
 xlabel('[\theta]')
 subplot(223);
-plot(w,RypShw);title('Smoothed Periodogram of hw');
+plot(w,RzShw);title('Smoothed Periodogram of hw');
 xlabel('[\theta]')
 subplot(224);
-plot(w,RypSam); title('Smoothed Periodogram of am');
+plot(w,RzSam); title('Smoothed Periodogram of am');
 xlabel('[\theta]')
 %%
 %--------------Histogram, amp. dist.--------------
