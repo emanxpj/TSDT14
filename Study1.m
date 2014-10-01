@@ -1,5 +1,5 @@
 Ts = 1;
-N = 2^14;
+N = 2^10;
 dt = Ts/N;
 fs = 1/dt;
 x=randn(N,1).';
@@ -42,25 +42,32 @@ subplot(232)
 plot(t,ryt1); xlim([-0.1 0.5]); title('Theoretical ry');
 subplot(233)
 stem(t,ryt1); title('Theoretical ry');
-
+subplot(234);
 ryp = EstimateACF(y, t, 'BmanT');
+plot(t,ryp); xlim([-0.1 0.5]); title('Estimated ry BmanT');
 subplot(235);
 plot(t,ryp); xlim([-0.1 0.5]); title('Estimated ry BmanT');
 
 ryp2 = EstimateACF(y, t, 'Blett');
-subplot(236)
+subplot(236);
 plot(t,ryp2); xlim([-0.1 0.5]); title('Estimated ry Blett');
 
-figure(3);
 Ryp = Periodogram(y);
 %%
 figure(3);
 subplot(221)
 plot(w,Ryt1); title('Theoretical Ry');
+subplot(222);
+ryp2 = periodogram(y); %matlabs own periodogram.
+plot(linspace(0,length(ryp2),length(ryp2)),ryp2); title('Matlab Rypred.')
 subplot(223);
-
 plot(w,Ryp);title('Predicted Ry with Periodogram');
+hold on;
+plot(w,Ryt1,'red');
 subplot(224)
-RypAv = PerAv(y,2^10);
-plot(w,RypAv)
+ryp3 = PeriodFourier(x);
+plot(w,ryp3);
+
+%RypAv = PerAv(y,2^10);
+%plot(w,RypAv)
 
