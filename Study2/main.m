@@ -72,9 +72,9 @@ xlabel('[\theta]')
 %----------------PerAv-------------------------------
 k = linspace(0,1,2^7);
 
-RzAvsq = PerAv(RzPsq,2^7);
-RzAvhw = PerAv(RzPhw,2^7);
-RzAvam = PerAv(RzPam,2^7);
+RzAvsq = PerAv(zsq,2^7);
+RzAvhw = PerAv(zhw,2^7);
+RzAvam = PerAv(zam,2^7);
 
 figure(5);
 subplot(222);
