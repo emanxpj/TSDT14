@@ -12,7 +12,7 @@ x = randn(1,N);
 
 
 n = linspace(0,N,N); 
-wc = 0.1;
+wc = 0.2;
 [b,a] = butter(10,wc,'low');
 
 y = filter(b,a,x);
@@ -25,7 +25,7 @@ t = linspace(-N/2,N/2,N);
 %%
 %-----------Skapar system---------------------------
 
-theta0 = (wc-0.05); %vad är ett lämpligt värde?
+theta0 = (wc-1.5); %vad är ett lämpligt värde?
 zsq = y.^2;
 
 zhw = zeros(1,N);
@@ -42,6 +42,12 @@ subplot(223)
 plot(t,zam);xlim([-N/2 N/2]);
 subplot(224)
 plot(t,y);xlim([-N/2 N/2]);
+%%
+%---------Kolla carrier frequency--------------------
+ZAM = fft(zam);
+figure(3);
+subplot(222);
+plot(t,ZAM); title('Histogram of sq');
 
 %%
 %----------------PSD av utsignaler----------------
@@ -52,7 +58,7 @@ Rypsq = PeriodFourier(zsq);
 Ryphw = PeriodFourier(zhw);
 Rypam = PeriodFourier(zam);
 
-figure(3);
+figure(4);
 subplot(222);
 plot(w,Rypsq); title('Raw Periodogram of sq');
 xlabel('[\theta]')
@@ -66,11 +72,11 @@ xlabel('[\theta]')
 %----------------PerAv-------------------------------
 k = linspace(0,1,2^7);
 
-RypAvsq = PerAv(zsq,2^7);
-RypAvhw = PerAv(zhw,2^7);
-RypAvam = PerAv(zam,2^7);
+RypAvsq = PerAv(Rypsq,2^7);
+RypAvhw = PerAv(Ryphw,2^7);
+RypAvam = PerAv(Rypam,2^7);
 
-figure(4);
+figure(5);
 subplot(222);
 plot(k,RypAvsq); title('Averaged Periodogram of sq');
 xlabel('[\theta]')
@@ -99,7 +105,7 @@ RypShw = windowing2(ryhw,65,w3);
 RypSam = windowing2(ryam,65, w2);
 RypSam = windowing2(ryam,65,w3);
 
-figure(3);
+figure(6);
 subplot(222);
 plot(w,RypSsq); title('Smoothed Periodogram of sq');
 xlabel('[\theta]')
@@ -109,3 +115,19 @@ xlabel('[\theta]')
 subplot(224);
 plot(w,RypSam); title('Smoothed Periodogram of am');
 xlabel('[\theta]')
+%%
+%--------------Histogram, amp. dist.--------------
+L = 2^7;
+l = linspace(0,1,L);
+[fsq,dsq] = hist(zsq,L);
+[fhw,dhw] = hist(zhw,L);
+[fam,dam] = hist(zam,L);
+
+
+figure(7);
+subplot(222);
+plot(l,fsq); title('Histogram of sq');
+subplot(223);
+plot(l,fhw);title('Histogram of hw');
+subplot(224);
+plot(l,fam); title('Histogram of am');
