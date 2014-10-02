@@ -12,7 +12,7 @@ x = randn(1,N);
 
 
 n = linspace(0,N,N); 
-wc = 0.1;
+wc = 0.2;
 [b,a] = butter(10,wc,'low');
 
 y = filter(b,a,x);
@@ -25,7 +25,7 @@ t = linspace(-N/2,N/2,N);
 %%
 %-----------Skapar system---------------------------
 
-theta0 = (wc-1.5); %vad är ett lämpligt värde?
+theta0 = (2*pi*0.2); %vad är ett lämpligt värde?
 zsq = y.^2;
 
 zhw = zeros(1,N);
@@ -44,10 +44,17 @@ subplot(224)
 plot(t,y);xlim([-N/2 N/2]);
 %%
 %---------Kolla carrier frequency--------------------
+w = linspace(0,1,N);
+ZSQ = fft(zsq);
+ZHW = fft(zhw);
 ZAM = fft(zam);
 figure(3);
 subplot(222);
-plot(t,ZAM); title('Histogram of sq');
+plot(w,ZSQ); title('fft of sq');
+subplot(223);
+plot(w,ZHW); title('fft of hw');
+subplot(224);
+plot(w,ZAM); title('fft of am');
 
 %%
 %----------------PSD av utsignaler----------------
@@ -129,8 +136,8 @@ l = linspace(0,1,L);
 
 figure(7);
 subplot(222);
-plot(l,fsq); title('Histogram of sq');
+plot(dsq,fsq); title('Histogram of sq');
 subplot(223);
-plot(l,fhw);title('Histogram of hw');
+plot(dhw,fhw);title('Histogram of hw');
 subplot(224);
-plot(l,fam); title('Histogram of am');
+plot(dam,fam); title('Histogram of am');
