@@ -12,7 +12,7 @@ x = randn(1,N);
 
 
 n = linspace(0,N,N); 
-wc = 0.2;
+wc = 0.1;
 [b,a] = butter(10,wc,'low');
 
 y = filter(b,a,x);
@@ -70,11 +70,14 @@ plot(w,RzPam); title('Raw Periodogram of am');
 xlabel('[\theta]')
 %%
 %----------------PerAv-------------------------------
-k = linspace(0,1,2^7);
+p = 2^3;
 
-RzAvsq = PerAv(zsq,2^7);
-RzAvhw = PerAv(zhw,2^7);
-RzAvam = PerAv(zam,2^7);
+
+k = linspace(0,1,N/p);
+
+RzAvsq = PerAv(zsq,p);
+RzAvhw = PerAv(zhw,p);
+RzAvam = PerAv(zam,p);
 
 figure(5);
 subplot(222);
