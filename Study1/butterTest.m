@@ -1,4 +1,4 @@
-N = 2^10;
+N = 2^12;
 N2 = N+1;
 Ts = 1; %length of the measured signal.
 fs = N/Ts; %sampling frequency.

@@ -2,14 +2,13 @@ addpath ./Study1;
 
 %--------Skapar filtrerat brus------------------------------
 
-N = 2^10;
+N = 2^14;
 N2 = N+1;
 Ts = 1; %length of the measured signal.
 fs = N/Ts; %sampling frequency.
 T = Ts/N; %sampling length.
 
 x = randn(1,N);
-
 
 n = linspace(0,N,N); 
 wc = 0.2;
@@ -45,10 +44,13 @@ plot(t,y);xlim([-N/2 N/2]);
 %%
 %---------Kolla carrier frequency--------------------
 w = linspace(0,1,N);
-ZSQ = fft(zsq);
-ZHW = fft(zhw);
-ZAM = fft(zam);
+Y = abs(fft(y));
+ZSQ = abs(fft(zsq));
+ZHW = abs(fft(zhw));
+ZAM = abs(fft(zam));
 figure(3);
+subplot(221);
+plot(w,Y); title('fft of y');
 subplot(222);
 plot(w,ZSQ); title('fft of sq');
 subplot(223);
