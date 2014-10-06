@@ -32,18 +32,26 @@ t = linspace(-N/2,N/2,N);
  
  
  %%
- 
- Ry = PeriodFourier(y);
- ry = EstimateACF(y,'Blett');
- figure(8);
- plot(t,ry);
- 
- 
+%.----------------Teoretiska Periodogram---------------
+
+theta0 = (2*pi*(wc+0.2)); %vad är ett lämpligt värde?
+
+Rzsqt = 4*wc*(tripuls(w/(4*wc))+tripuls((w-1)/(4*wc)));
+Rzsqt(1) = Rzsqt(1) + 4*wc^2;
+
+Rzhwt = 1/(4*pi)*(tripuls(w/(4*wc))+tripuls((w-1)/(4*wc)))+...
+    +1/4*(rectpuls(w/(2*wc))+rectpuls((w-1)/(2*wc)));
+Rzhwt(1) = Rzhwt(1)+wc/pi;
+
+theta1=theta0/(2*pi);
+
+Rzamt = 1/4*(rectpuls((w-theta1)/(2*wc))+rectpuls((w-1-theta1)/(2*wc))) +...
+    + 1/4*(rectpuls((w+theta1)/(2*wc))+rectpuls((w-1+theta1)/(2*wc)));
+
  
 %%
 %-----------Skapar system---------------------------
 
-theta0 = (2*pi*wc); %vad är ett lämpligt värde?
 zsq = y.^2;
 
 zhw = zeros(1,N);
@@ -152,12 +160,15 @@ RzSam2 = windowing2(rzam,65,w3);
 figure(6);
 subplot(222);
 plot(w,RzSsq); title('Smoothed Periodogram of sq');
+hold on; plot(w,Rzsqt,'r');hold off;
 xlabel('[\theta]')
 subplot(223);
 plot(w,RzShw);title('Smoothed Periodogram of hw');
+hold on; plot(w,Rzhwt,'r');hold off;
 xlabel('[\theta]')
 subplot(224);
 plot(w,RzSam); title('Smoothed Periodogram of am');
+hold on; plot(w,Rzamt,'r');hold off;
 xlabel('[\theta]')
 %%
 %--------------Histogram, amp. dist.--------------
