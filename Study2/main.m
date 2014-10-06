@@ -1,30 +1,49 @@
-addpath ./Study1;
+addpath ../Study1;
 
 %--------Skapar filtrerat brus------------------------------
 
-N = 2^14;
-N2 = N+1;
+
+% Triangel 
+
+N = 2^11;
+
 Ts = 1; %length of the measured signal.
 fs = N/Ts; %sampling frequency.
 T = Ts/N; %sampling length.
 
 x = randn(1,N);
+w = linspace(0,1,N);
 
 n = linspace(0,N,N); 
-wc = 0.2;
-[b,a] = butter(10,wc,'low');
+wc = 0.1;
+[b,a] = butter(10,2*wc,'low');
 
-y = filter(b,a,x);
+H = zeros(1,N);
+H(w<wc) = 1;
+H(wc>1-wc) =1;
+y = ifft(H.*fft(x),'symmetric');
 t = linspace(-N/2,N/2,N);
+%y = filter(b,a,x);
 % figure(1)
 % subplot(211)
 % plot(t,x);xlim([-N/2 N/2]);
 % subplot(212)
  plot(t,y);xlim([-N/2 N/2]);
+ 
+ 
+ %%
+ 
+ Ry = PeriodFourier(y);
+ ry = EstimateACF(y,'Blett');
+ figure(8);
+ plot(t,ry);
+ 
+ 
+ 
 %%
 %-----------Skapar system---------------------------
 
-theta0 = (2*pi*0.2); %vad är ett lämpligt värde?
+theta0 = (2*pi*wc); %vad är ett lämpligt värde?
 zsq = y.^2;
 
 zhw = zeros(1,N);
@@ -41,9 +60,22 @@ subplot(223)
 plot(t,zam);xlim([-N/2 N/2]);
 subplot(224)
 plot(t,y);xlim([-N/2 N/2]);
+
+%%
+
+
+ Ry = PeriodFourier(y);
+ rz = EstimateACF(zsq,'Blett');
+ figure(9);
+ z3 = abs(fft(rz));
+ z3(1:5) = 0;
+ plot(w,z3);
+ 
+
+
 %%
 %---------Kolla carrier frequency--------------------
-w = linspace(0,1,N);
+
 Y = abs(fft(y));
 ZSQ = abs(fft(zsq));
 ZHW = abs(fft(zhw));
