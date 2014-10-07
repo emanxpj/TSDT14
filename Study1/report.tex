@@ -35,6 +35,14 @@ The ACF and PSD were first theoretically calculated and then estimated.
 The ACF was estimated using Blackman-Tukey's- and Barlett's -estimate and the
 PDF was estimated using periodograms, averaged periodograms and smoothed periodograms.
 
+\subsection{Study 2 – Non-LTI-systems}
+In study 2 we use noise filtered through an ideal filter and use it as input to three different non-LTI-systems.
+This gives us output signals for which the PSD is computed, both theoretically and by using the estimation methods
+from study 1. The  amplitude distribution is also computed. Both the PSD and the  amplitude distribution are then used
+to demonstrate that the systems are non-LTI.
+
+
+
 \subsection{Notation}
 The following notations will be used. \\
 PSD - Power Spectral Density \\
@@ -48,7 +56,7 @@ WGN - White Gaussian Noise
 
 White Gaussian noise is used in this study. It was filtered through the two
  filters described in equation~\ref{eq:simpleH} and equation~\ref{eq:idealH},
-  to produce our signal y.
+  to produce our signal $y$.
  The ideal filter is approximated by a highorder Butterworth lowpass filter.
 
 \begin{equation}
@@ -119,6 +127,43 @@ The smoothed periodogram was done by first multiplying the estimated ACF with a
  \hat{R}_{y,smoothed} = \mathcal{F}\{\hat{r}_yw[k]\}
  \end{equation}
 
+\subsection{Study 2 – Non-LTI-systems}
+White Gaussian noise is used in this study. It was filtered through an ideal filter 
+described in equation~\ref{eq:idealH} to produce the signal $x$.
+
+\begin{equation}
+  \label{eq:idealH}
+  H[\theta]_{simple} =rect(\theta)
+\end{equation}
+
+This signal, $x$, is then used as input to the three different non-LTI-systems described in equation~\ref{eq:SQsys},
+~\ref{eq:HWsys} and ~\ref{eq:AMsys}. This gives the output signal $y$.
+
+\begin{equation}
+  \label{eq:SQsys}
+  Y[n]_{sq} =X^2[n]
+\end{equation}
+
+\begin{equation}
+  \label{eq:HWsys}
+  Y[n]_{hw} =
+\begin{cases}
+   X[n],& n: X[n]>0,\\
+    0,    & n: X[n] \leq 0,
+\end{cases}
+\end{equation}
+
+
+\begin{equation}
+  \label{eq:AMsys}
+  Y[n]_{am} =X[n]cos(\Omega_{0}n)
+\end{equation}
+
+\subsubsection{Theoretical PSD}
+
+\subsubsection{Amplitude distribution and estimated PSD}
+The amplitude distribution is computed by using a histogram and the PSD is estimated using the same methods
+as in study 1.
 
 \section{Result and conclusion}
 \subsection{Study 1 – Modelling Signals}
