@@ -109,12 +109,12 @@ plot(w,Ryt1,'red');
 hold off;
 xlabel('\theta')
 legend('Estimated','Theoretical')
-print -depsc Smoothed.eps
+print -depsc ../Report/Smoothed.eps
 
 figure(4)
 plot(w,Ryt1); title('Theoretical PSD');
 xlabel('\theta')
-print -depsc TheoPSD.eps
+print -depsc ../Report/TheoPSD.eps
 
 figure(5)
 subplot(121);
@@ -123,7 +123,7 @@ xlabel('k')
 subplot(122);
 stem(stemT,ryt1(N/2 -19:N/2+20)); title('Theoretical autocorrelationfunction');
 xlabel('k')
-print -depsc TheoACF.eps
+print -depsc ../Report/TheoACF.eps
 
 figure(6)
 subplot(221);
@@ -138,7 +138,7 @@ xlabel('k')
 subplot(224);
 stem(stemT,ryMy2(N/2-19:N/2+20));title('Bartlett Estimate of ACF');
 xlabel('k')
-print -depsc EstACF.eps
+print -depsc ../Report/EstACF.eps
 
 figure(7)
 subplot(121);
@@ -155,4 +155,4 @@ hold on;
 plot(w,Ryt1,'red');
 hold off;
 legend('Estimated','Theoretical')
-print -depsc Periodogram.eps
+print -depsc ../Report/Periodogram.eps

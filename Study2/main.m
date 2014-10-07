@@ -1,11 +1,15 @@
 addpath ../Study1;
 
+close all;
+clear all;
+clc;
+
 %--------Skapar filtrerat brus------------------------------
 
 
 % Triangel 
 
-N = 2^11;
+N = 2^12;
 
 Ts = 1; %length of the measured signal.
 fs = N/Ts; %sampling frequency.
@@ -21,9 +25,9 @@ wc = 0.1;
 H = zeros(1,N);
 H(w<wc) = 1;
 H(wc>1-wc) =1;
-y = ifft(H.*fft(x),'symmetric');
+%y = ifft(H.*fft(x),'symmetric');
 t = linspace(-N/2,N/2,N);
-%y = filter(b,a,x);
+y = filter(b,a,x);
 % figure(1)
 % subplot(211)
 % plot(t,x);xlim([-N/2 N/2]);
@@ -172,17 +176,20 @@ hold on; plot(w,Rzamt,'r');hold off;
 xlabel('[\theta]')
 %%
 %--------------Histogram, amp. dist.--------------
-L = 2^7;
+L = 2^4;
 l = linspace(0,1,L);
 [fsq,dsq] = hist(zsq,L);
 [fhw,dhw] = hist(zhw,L);
 [fam,dam] = hist(zam,L);
 
-
 figure(7);
+subplot(221);
+hist(y,L); title('Histogram for filtered signal');
+
 subplot(222);
-plot(dsq,fsq); title('Histogram of sq');
+hist(zsq,L);
+title('Histogram of sq');
 subplot(223);
-plot(dhw,fhw);title('Histogram of hw');
+hist(zhw,L);title('Histogram of hw');
 subplot(224);
-plot(dam,fam); title('Histogram of am');
+hist(zam,L); title('Histogram of am');
