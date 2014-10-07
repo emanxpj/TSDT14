@@ -24,7 +24,7 @@ wc = 0.1;
 
 H = zeros(1,N);
 H(w<wc) = 1;
-H(wc>1-wc) =1;
+H(w>1-wc) =1;
 %y = ifft(H.*fft(x),'symmetric');
 t = linspace(-N/2,N/2,N);
 y = filter(b,a,x);
@@ -39,6 +39,10 @@ y = filter(b,a,x);
 %.----------------Teoretiska Periodogram---------------
 
 theta0 = (2*pi*(wc+0.2)); %vad är ett lämpligt värde?
+
+Ryt = zeros(1,N);
+Ryt(abs(w) <wc ) = 1;
+Ryt(abs(w) >1-wc ) = 1;
 
 Rzsqt = 4*wc*(tripuls(w/(4*wc))+tripuls((w-1)/(4*wc)));
 Rzsqt(1) = Rzsqt(1) + 4*wc^2;
@@ -63,7 +67,7 @@ zhw(y>0) = y(y>0);
 
 zam = y.*cos(theta0*n);
 %plot av sytemsignaler
-figure(2)
+figure;
 subplot(221)
 plot(t,zsq);xlim([-N/2 N/2]);
 subplot(222)
@@ -78,7 +82,7 @@ plot(t,y);xlim([-N/2 N/2]);
 
  Ry = PeriodFourier(y);
  rz = EstimateACF(zsq,'Blett');
- figure(9);
+ figure;
  z3 = abs(fft(rz));
  z3(1:5) = 0;
  plot(w,z3);
@@ -92,7 +96,7 @@ Y = abs(fft(y));
 ZSQ = abs(fft(zsq));
 ZHW = abs(fft(zhw));
 ZAM = abs(fft(zam));
-figure(3);
+figure;
 subplot(221);
 plot(w,Y); title('fft of y');
 subplot(222);
@@ -106,12 +110,12 @@ plot(w,ZAM); title('fft of am');
 %----------------PSD av utsignaler----------------
 %------------Periodogram----------------------
 w = linspace(0,1,N);
-
+Ry = PeriodFourier(y);
 RzPsq = PeriodFourier(zsq);
 RzPhw = PeriodFourier(zhw);
 RzPam = PeriodFourier(zam);
 
-figure(4);
+figure;
 subplot(222);
 plot(w,RzPsq); title('Raw Periodogram of sq');
 xlabel('[\theta]')
@@ -123,25 +127,25 @@ plot(w,RzPam); title('Raw Periodogram of am');
 xlabel('[\theta]')
 %%
 %----------------PerAv-------------------------------
-p = 2^3;
-
-
-k = linspace(0,1,N/p);
-
-RzAvsq = PerAv(zsq,p);
-RzAvhw = PerAv(zhw,p);
-RzAvam = PerAv(zam,p);
-
-figure(5);
-subplot(222);
-plot(k,RzAvsq); title('Averaged Periodogram of sq');
-xlabel('[\theta]')
-subplot(223);
-plot(k,RzAvhw);title('Averaged Periodogram of hw');
-xlabel('[\theta]')
-subplot(224);
-plot(k,RzAvam); title('Averaged Periodogram of am');
-xlabel('[\theta]')
+% p = 2^3;
+% 
+% 
+% k = linspace(0,1,N/p);
+% 
+% RzAvsq = PerAv(zsq,p);
+% RzAvhw = PerAv(zhw,p);
+% RzAvam = PerAv(zam,p);
+% 
+% figure;
+% subplot(222);
+% plot(k,RzAvsq); title('Averaged Periodogram of sq');
+% xlabel('[\theta]')
+% subplot(223);
+% plot(k,RzAvhw);title('Averaged Periodogram of hw');
+% xlabel('[\theta]')
+% subplot(224);
+% plot(k,RzAvam); title('Averaged Periodogram of am');
+% xlabel('[\theta]')
 
 %%
 %-------------Smoothed periodogram-------------------
@@ -161,7 +165,7 @@ RzShw2 = windowing2(rzhw,65,w3);
 RzSam = windowing2(rzam,65, w2);
 RzSam2 = windowing2(rzam,65,w3);
 
-figure(6);
+figure;
 subplot(222);
 plot(w,RzSsq); title('Smoothed Periodogram of sq');
 hold on; plot(w,Rzsqt,'r');hold off;
@@ -182,7 +186,7 @@ l = linspace(0,1,L);
 [fhw,dhw] = hist(zhw,L);
 [fam,dam] = hist(zam,L);
 
-figure(7);
+figure;
 subplot(221);
 hist(y,L); title('Histogram for filtered signal');
 
@@ -193,3 +197,55 @@ subplot(223);
 hist(zhw,L);title('Histogram of hw');
 subplot(224);
 hist(zam,L); title('Histogram of am');
+
+
+%%
+%Printing of figures.
+figure;
+subplot(221);
+plot(w,Ryt); title('PSD of filtered signal (input to the systems)'); ylim([0 1.25]);
+xlabel('\theta');
+subplot(222);
+plot(w,Rzsqt); title('PSD of halfwave rectified signal'); ylim([0 0.5]);
+xlabel('\theta');
+subplot(223);
+plot(w,Rzhwt); title('PSD of squared signal');ylim([0 0.5]);
+xlabel('\theta');
+subplot(224);
+plot(w,Rzamt); title('PSD of AM-SC modulated signal');ylim([0 0.5]);
+xlabel('\theta');
+
+print -depsc ../Report/TheoPSD2.eps
+
+figure;
+subplot(221); 
+plot(w,Ry); title('Raw Periodogram of sq');
+xlabel('[\theta]')
+hold on; plot(w,Ryt,'r'); hold off;
+subplot(222);
+plot(w,RzPsq); title('Raw Periodogram of sq');ylim([0 3]);
+xlabel('[\theta]')
+hold on; plot(w,Rzsqt,'r'); hold off;
+subplot(223);
+plot(w,RzPhw);title('Raw Periodogram of hw');ylim([0 3]);
+xlabel('[\theta]')
+hold on; plot(w,Rzhwt,'r'); hold off;
+subplot(224);
+plot(w,RzPam); title('Raw Periodogram of am');
+xlabel('[\theta]')
+hold on; plot(w,Rzamt,'r'); hold off;
+
+print -depsc ../Report/RawPSD2.eps
+
+figure;
+subplot(221);
+hist(y,L); title('Histogram for filtered signal');
+subplot(222);
+hist(zsq,L);
+title('Histogram of sq');
+subplot(223);
+hist(zhw,L);title('Histogram of hw');
+subplot(224);
+hist(zam,L); title('Histogram of am');
+
+print -depsc ../Report/Histogram.eps

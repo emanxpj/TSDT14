@@ -128,7 +128,7 @@ The smoothed periodogram was done by first multiplying the estimated ACF with a
  \end{equation}
 
 \subsection{Study 2 – Non-LTI-systems}
-White Gaussian noise is used in this study. It was filtered through an ideal filter 
+White Gaussian noise is used in this study. It was filtered through an ideal filter
 described in equation~\ref{eq:idealH} to produce the signal $x$.
 
 \begin{equation}
@@ -136,8 +136,9 @@ described in equation~\ref{eq:idealH} to produce the signal $x$.
   H[\theta]_{simple} =rect(\theta)
 \end{equation}
 
-This signal, $x$, is then used as input to the three different non-LTI-systems described in equation~\ref{eq:SQsys},
-~\ref{eq:HWsys} and ~\ref{eq:AMsys}. This gives the output signal $y$.
+This signal, $x$, is then used as input to the three different non-LTI-systems
+described in equation~\ref{eq:SQsys},~\ref{eq:HWsys} and~\ref{eq:AMsys}.
+This gives the output signal $y$.
 
 \begin{equation}
   \label{eq:SQsys}
@@ -159,17 +160,29 @@ This signal, $x$, is then used as input to the three different non-LTI-systems d
   Y[n]_{am} =X[n]cos(\Omega_{0}n)
 \end{equation}
 
+\subsubsection{Theoretical background}
+
+Non-LTI-systems may break some properties that LTI-systems display.
+Equation~\ref{eq:super} may be broken by non-LTI-systems, in other words we may
+get new frequencies in our PSD when dealing with non-LTI-systems.
+Gaussian input to a LTI-system has to produce a gaussian output, this does not
+hold for non-LTI-systems.
+
+
 \subsubsection{Theoretical PSD}
 
+
+
 \subsubsection{Amplitude distribution and estimated PSD}
-The amplitude distribution is computed by using a histogram and the PSD is estimated using the same methods
-as in study 1.
+The amplitude distribution is computed by using a histogram and the PSD
+is estimated using the same methods as in study 1.
 
 \section{Result and conclusion}
 \subsection{Study 1 – Modelling Signals}
 
-Noted in equation~\ref{eq:ACFsimple} is the theoretically calculated functions for the ACF
-for the simple filter and equation~\ref{eq:ACFideal} for the close to ideal filter.
+Noted in equation~\ref{eq:ACFsimple} is the theoretically calculated functions
+for the ACF for the simple filter and equation~\ref{eq:ACFideal} for the close
+to ideal filter.
 Equation~\ref{eq:PSDsimple} does the same for the simple filter's PSD
 and equation~\ref{eq:PSDideal}, the close to ideal filter's PSD.
 
