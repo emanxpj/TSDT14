@@ -219,7 +219,7 @@ print -depsc ../Report/TheoPSD2.eps
 
 figure;
 subplot(221); 
-plot(w,Ry); title('Raw Periodogram of sq');
+plot(w,Ry); title('Raw Periodogram of input');
 xlabel('[\theta]')
 hold on; plot(w,Ryt,'r'); hold off;
 subplot(222);

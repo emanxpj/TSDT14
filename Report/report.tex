@@ -51,8 +51,8 @@ $\hat{r_y}$ - Estimated ACF of signal y. \\
 $\hat{R_y}$ - Estimated PSD of signal y. \\
 WGN - White Gaussian Noise
 
-\section{Method}
-\subsection{Study 1 – Modelling Signals}
+\section{Study 1 – Modelling Signals}
+\subsection{Method}
 
 White Gaussian noise is used in this study. It was filtered through the two
  filters described in equation~\ref{eq:simpleH} and equation~\ref{eq:idealH},
@@ -88,8 +88,8 @@ The ACF can be calculated using inverse fourier transform, see equation~\ref{eq:
 
 
 
-\subsubsection{Estimated ACF and PSD}
-The ACF was to be estimated using Blackman-Tukey's- and Barlett's -estimate.
+\subsubsection{Estimation of ACF and PSD}
+The ACF was estimated using Blackman-Tukey's- and Barlett's -estimate.
 This was done using equation~\ref{eq:BmanT} and equation ~\ref{eq:Blett}.
 
 \begin{equation}
@@ -127,58 +127,9 @@ The smoothed periodogram was done by first multiplying the estimated ACF with a
  \hat{R}_{y,smoothed} = \mathcal{F}\{\hat{r}_yw[k]\}
  \end{equation}
 
-\subsection{Study 2 – Non-LTI-systems}
-White Gaussian noise is used in this study. It was filtered through an ideal filter
-described in equation~\ref{eq:idealH} to produce the signal $x$.
-
-\begin{equation}
-  \label{eq:idealH}
-  H[\theta]_{simple} =rect(\theta)
-\end{equation}
-
-This signal, $x$, is then used as input to the three different non-LTI-systems
-described in equation~\ref{eq:SQsys},~\ref{eq:HWsys} and~\ref{eq:AMsys}.
-This gives the output signal $y$.
-
-\begin{equation}
-  \label{eq:SQsys}
-  Y[n]_{sq} =X^2[n]
-\end{equation}
-
-\begin{equation}
-  \label{eq:HWsys}
-  Y[n]_{hw} =
-\begin{cases}
-   X[n],& n: X[n]>0,\\
-    0,    & n: X[n] \leq 0,
-\end{cases}
-\end{equation}
 
 
-\begin{equation}
-  \label{eq:AMsys}
-  Y[n]_{am} =X[n]cos(\Omega_{0}n)
-\end{equation}
-
-\subsubsection{Theoretical background}
-
-Non-LTI-systems may break some properties that LTI-systems display.
-Equation~\ref{eq:super} may be broken by non-LTI-systems, in other words we may
-get new frequencies in our PSD when dealing with non-LTI-systems.
-Gaussian input to a LTI-system has to produce a gaussian output, this does not
-hold for non-LTI-systems.
-
-
-\subsubsection{Theoretical PSD}
-
-
-
-\subsubsection{Amplitude distribution and estimated PSD}
-The amplitude distribution is computed by using a histogram and the PSD
-is estimated using the same methods as in study 1.
-
-\section{Result and conclusion}
-\subsection{Study 1 – Modelling Signals}
+\subsection{Result and conclusion}
 
 Noted in equation~\ref{eq:ACFsimple} is the theoretically calculated functions
 for the ACF for the simple filter and equation~\ref{eq:ACFideal} for the close
@@ -340,5 +291,117 @@ PSD but it has a large variance. This variance was improved when using averaged 
 
 
 \clearpage
+
+
+\section{Study 2 – Non-LTI-systems}
+White Gaussian noise is used in this study. It was filtered through an ideal filter
+described in equation~\ref{eq:idealH2} to produce the signal $x$.
+
+\begin{equation}
+  \label{eq:idealH2}
+  H[\theta]_{simple} =rect(\theta)
+\end{equation}
+
+This signal, $x$, is then used as input to the three different non-LTI-systems
+described in equation~\ref{eq:SQsys},~\ref{eq:HWsys} and~\ref{eq:AMsys}.
+This gives the output signal $y$.
+
+\begin{equation}
+  \label{eq:SQsys}
+  Y[n]_{sq} =X^2[n]
+\end{equation}
+
+\begin{equation}
+  \label{eq:HWsys}
+  Y[n]_{hw} =
+\begin{cases}
+   X[n],& n: X[n]>0,\\
+    0,    & n: X[n] \leq 0,
+\end{cases}
+\end{equation}
+
+
+\begin{equation}
+  \label{eq:AMsys}
+  Y[n]_{am} =X[n]cos(\Omega_{0}n)
+\end{equation}
+
+\subsection{Theoretical background}
+
+Non-LTI-systems may break some properties that LTI-systems display.
+Equation~\ref{eq:super} may be broken by non-LTI-systems, in other words we may
+get new frequencies in our PSD when dealing with non-LTI-systems.
+Gaussian input to a LTI-system has to produce a gaussian output, this does not
+hold for non-LTI-systems.
+
+\begin{equation}
+  \label{eq:super}
+  R_y[\theta] =|H[\theta]|^2*R_x
+\end{equation}
+
+
+\subsection{Theoretical PSD}
+The PSD's of our filtered, halfwaverectified, squared and AM-SC modulated signal
+are presented in figure~\ref{fig:theoPSD2}
+
+\begin{figure}[!hp]
+
+    \begin{center}
+      \includegraphics[width=0.6\textwidth]{TheoPSD2}
+    \caption{PSD's of our systems \label{fig:theoPSD2}}
+    \end{center}
+
+\end{figure}
+
+\subsection{Method}
+The signal was lowpassed using a high order low pass filter. The filtered signal
+is then used to construct the three systems as described in
+equations~\ref{eq:SQsys},~\ref{eq:HWsys} and~\ref{eq:AMsys}.
+The PSD's were estimated by the methods described in Study 1.
+
+\subsection{Results and conclusion}
+
+\subsubsection{Periodograms}
+As we can see in figure~\ref{fig:RawPSD2} new frequencies present themselves in
+the non-linear systems compared to in the PSD of input, where we almost perfectly
+have no frequencies between 0.1 and 0.9. All three of the non-linear systems show
+frequencies between 0.1 and 0.9, even if the halfwaverectified signal doesn't do
+so as clearly as the others, and thus contradicts equation~\ref{eq:super}, as can
+be expected. At zero in the squared- and the halfwaverectified-
+signal there is a very large spike. This is a dirac in the theoretical analysis
+of the systems, but when dealing with numerical estimations this spike becomes
+extremely large. The windows yaxis has been set to display the main part of the
+signal instead of accomodating this large spike.
+
+
+\begin{figure}[!hp]
+
+    \begin{center}
+      \includegraphics[width=0.6\textwidth]{RawPSD2}
+    \caption{Estimated PSD's of our systems, with red theoretical overlay \label{fig:RawPSD2}}
+    \end{center}
+
+\end{figure}
+
+\subsubsection{Amplitude distribution}
+The amplitude distribution is computed by using a histogram and the PSD
+is estimated using the same methods as in study 1.
+The in-signal, in figure~\ref{fig:hist} is the only signal that is truly gaussian in it's distribution,
+with the AM-SC histogram having a tendency towards gaussian but seems to have a
+too high peak centered around zero. These results are expected when dealing with
+non-linearities.
+
+\begin{figure}[!hp]
+
+    \begin{center}
+      \includegraphics[width=0.6\textwidth]{Histogram}
+    \caption{Histograms of our systems \label{fig:hist}}
+    \end{center}
+
+\end{figure}
+
+
+\clearpage
+
 
 \end{document}

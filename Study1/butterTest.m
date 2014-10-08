@@ -46,9 +46,6 @@ Rx = 1;
 RyMy1 = PeriodFourier(y);
 
 p = 2^7;
-
-
-RyMy1 = RyMy1([N/2+1:N 1:N/2]);
 Ryt1 = zeros(1,N);
 Ryt1(abs(w) <a/2 ) = 1;
 w = linspace(0,1,N);

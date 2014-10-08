@@ -1,3 +1,7 @@
+clear;
+clc;
+close all;
+
 N = 2^10;
 Ts = 1; %length of the measured signal.
 fs = N/Ts; %sampling frequency.
