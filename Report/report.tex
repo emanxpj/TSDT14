@@ -49,7 +49,11 @@ PSD - Power Spectral Density \\
 ACF - Auto correlation function \\
 $\hat{r_y}$ - Estimated ACF of signal y. \\
 $\hat{R_y}$ - Estimated PSD of signal y. \\
-WGN - White Gaussian Noise
+WGN - White Gaussian Noise\\
+Sq - Shorthand for squarer\\
+Hw - Shorthand for half-wave rectifier\\
+Am - Shorthand for AM-SC modulator\\
+$\Omega_0$ - Carrier frequency\\
 
 \section{Study 1 – Modelling Signals}
 \subsection{Method}
@@ -66,7 +70,7 @@ White Gaussian noise is used in this study. It was filtered through the two
 
 \begin{equation}
   \label{eq:idealH}
-  H[\theta]_{ideal} =rect(\frac{\theta}{\theta_0} )
+  H[\theta]_{ideal} =rect(\frac{\theta}{2\theta_0} )
 \end{equation}
 
 \subsubsection{Theoretical ACF and PSD}
@@ -149,12 +153,12 @@ and equation~\ref{eq:PSDideal}, the close to ideal filter's PSD.
 
 \begin{equation}
   \label{eq:ACFideal}
-  r_{y,ideal} = R_x\theta_{0}sinc(n\theta_0);
+  r_{y,ideal} = R_x2\theta_{0}sinc[n2\theta_0];
 \end{equation}
 
 \begin{equation}
   \label{eq:PSDideal}
-  R_{y,ideal} = R_xrect(\frac{\theta - k}{\theta_0})
+  R_{y,ideal} = R_xrect[\frac{\theta - k}{2\theta_0}]
 \end{equation}
 
 
@@ -299,7 +303,7 @@ described in equation~\ref{eq:idealH2} to produce the signal $x$.
 
 \begin{equation}
   \label{eq:idealH2}
-  H[\theta]_{simple} =rect(\theta)
+  H[\theta]_{simple} =rect(\frac{\theta} {2\theta_c})
 \end{equation}
 
 This signal, $x$, is then used as input to the three different non-LTI-systems
@@ -332,17 +336,39 @@ Non-LTI-systems may break some properties that LTI-systems display.
 Equation~\ref{eq:super} may be broken by non-LTI-systems, in other words we may
 get new frequencies in our PSD when dealing with non-LTI-systems.
 Gaussian input to a LTI-system has to produce a gaussian output, this does not
-hold for non-LTI-systems.
+need to hold for non-LTI-systems.
 
 \begin{equation}
   \label{eq:super}
-  R_y[\theta] =|H[\theta]|^2*R_x
+  R_y[\theta] =|H[\theta]|^2R_x
 \end{equation}
 
 
 \subsection{Theoretical PSD}
-The PSD's of our filtered, halfwaverectified, squared and AM-SC modulated signal
-are presented in figure~\ref{fig:theoPSD2}
+The PSD's of our filtered, squared, halfwaverectified and AM-SC modulated signal
+are presented in figure~\ref{fig:theoPSD2} aswell as in equation~\ref{eq:PSDfiltsig},~\ref{eq:PSDsq},~\ref{eq:PSDhw}
+and~\ref{eq:PSDam}.
+
+\begin{equation}
+  \label{eq:PSDfiltsig}
+   R_x[\theta] = rect[\frac{\theta} {2\theta_c}]
+\end{equation}
+
+\begin{equation}
+  \label{eq:PSDsq}
+  R_{sq}[\theta] = 4\theta_c\Lambda[\frac{\theta}{2\theta_c}]+4\theta_c^2\delta[\theta]
+\end{equation}
+
+\begin{equation}
+  \label{eq:PSDhw}
+ R_{hw}[\theta] = \frac{1}{4\pi}\Lambda[\frac{\theta}{2\theta_c}]+\frac{1}{4}rect[\frac{\theta} {2\theta_c}]
++\frac{\theta_c}{\pi}\delta[\theta]
+\end{equation}
+
+\begin{equation}
+  \label{eq:PSDam}
+  R_{am}[\theta] = \frac{1}{4}(rect[\frac{\theta+\Omega_{0}} {2\theta_c}]+rect[\frac{\theta-\Omega_{0}} {2\theta_c}])
+\end{equation}
 
 \begin{figure}[!hp]
 
@@ -354,10 +380,12 @@ are presented in figure~\ref{fig:theoPSD2}
 \end{figure}
 
 \subsection{Method}
-The signal was lowpassed using a high order low pass filter. The filtered signal
-is then used to construct the three systems as described in
+The signal was filtered using a ideal low pass filter. The filtered signal
+is then used as input to the three systems as described in
 equations~\ref{eq:SQsys},~\ref{eq:HWsys} and~\ref{eq:AMsys}.
 The PSD's were estimated by the methods described in Study 1.
+Three histograms of the output signals are used as amplitude distributions
+and then compared to the input distribution.
 
 \subsection{Results and conclusion}
 
@@ -384,9 +412,7 @@ signal instead of accomodating this large spike.
 \end{figure}
 
 \subsubsection{Amplitude distribution}
-The amplitude distribution is computed by using a histogram and the PSD
-is estimated using the same methods as in study 1.
-The in-signal, in figure~\ref{fig:hist} is the only signal that is truly gaussian in it's distribution,
+The input signal, in figure~\ref{fig:hist} is the only signal that is truly gaussian in its distribution,
 with the AM-SC histogram having a tendency towards gaussian but seems to have a
 too high peak centered around zero. These results are expected when dealing with
 non-linearities.
