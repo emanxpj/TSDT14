@@ -42,7 +42,7 @@ from study 1. The  amplitude distribution is also computed. Both the PSD and the
 to demonstrate that the systems are non-LTI.
 
 \subsection{Study 3 – Special Operations}
-In study 3 we use the filtered nois from study 2 as input to two different systems.
+In study 3 we use the filtered noise from study 2 as input to two different systems.
 This gives us output signals for which the PSD is computed theoretically and estimated using
 periodograms, as in study 1. The theoretical and estimated PSD is then compared.
 
@@ -433,7 +433,7 @@ non-linearities.
 \clearpage
 
 \subsection{Study 3 – Special Operations}
-The input signal from study 2, $x$m is used as input signal in this study too. It consists of 
+The input signal from study 2, $x$m is used as input signal in this study too. It consists of
 filtered white Gaussian noise and is used as inputs to systems described in equation ~\ref{eq:alt}
 and ~\ref{eq:dec}. This gives the output signals $Y_{alt}$ and $Y_{dec}$.
 
@@ -462,17 +462,69 @@ in ~\ref{eq:alt2} and ~\ref{eq:dec2}.
 
 \begin{equation}
   \label{eq:dec2}
-  Y[n]_{alt} =\frac{1}{2}X[n](1+cos(\pi n))
+  Y[n]_{dec} =\frac{1}{2}X[n](1+cos(\pi n))
 \end{equation}
 
 The system in~\ref{eq:alt2} describes the same alternating system as equation~\ref{eq:alt} and
 the system in~\ref{eq:dec2} describes the same decimating system as equation~\ref{eq:dec}.
-By ocular inspection we see that equation~\ref{eq:alt} describes a amplitude modulation with 
+By ocular inspection we see that equation~\ref{eq:alt} describes a amplitude modulation with
 suppressed carrier, amplitude constant one and carrier frequency one half. In turn equation~\ref{eq:dec}
 describes a demodulation with amplitude constant one half and carrier frequency one fourth.
 
 \subsection{Theoretical PSD}
 
+Since the systems can be described as a modulation and demodulation the corresponding equations
+for the PSD's can be found in \emph{Signal Theory, 2011, Mikael Olofsson}. This gives us the
+equations~\ref{eq:PSDalt} and~\ref{eq:PSDdec}. Where $R_X$ can be found in equation~\ref{eq:RX}.
+In equation~\ref{eq:PSDalt}, $\theta_c$ will be 0.5, this means that the two
+resulting rectangular functions will overlap. A similar thing happens in
+equation~\ref{eq:PSDdec} as well.
 
+
+\begin{equation}
+  \label{eq:RX}
+  R_{X} = rect(\frac{\theta}{2\theta_0} )
+\end{equation}
+
+\begin{equation}
+  \label{eq:PSDalt}
+  R_{alt} = \frac{1}{4}(R_X(\theta+\theta_c) + R_X(\theta-\theta_c)) = \Bigg/ \theta_c = \frac{1}{2} \Bigg/ = \frac{1}{2}(R_X(\theta-\frac{1}{2}))
+\end{equation}
+
+\begin{align}
+  \label{eq:PSDdec}
+  R_{dec} & = \frac{1}{2^2}R_X(\theta) + \frac{1}{2^2}\frac{1}{4}(R_X(\theta+2\theta_c)
+  + R_X(\theta-2\theta_c)) \\
+   & = \Bigg/ \theta_c  = \frac{1}{4} \Bigg/ = \nonumber
+   \frac{1}{4}R_X(\theta) + \frac{1}{8}R_X(\theta-\frac{1}{2})
+\end{align}
+
+
+\subsection{Results and conclusion}
+
+As we can see in figure~\ref{fig:PSD3} the estimated PSD's are approximated
+quite nicely, this effect is even more clearly visible when the PSD's are smoothed
+with a Blackman-Harris window of size 65 as we can see in figure~\ref{fig:PSD3smooth}
+It's interesting to note that a alternating sampling of a signal corresponds to
+a amplitude modulation with suppressed carrier and that a decimation can be seen
+as the demodulation with scaled amplitude.
+
+\begin{figure}[!hp]
+
+    \begin{center}
+      \includegraphics[width=0.6\textwidth]{PSD3}
+    \caption{PSD of input and the two outputs \label{fig:PSD3}}
+    \end{center}
+
+\end{figure}
+
+\begin{figure}[!hp]
+
+    \begin{center}
+      \includegraphics[width=0.6\textwidth]{PSD3smooth}
+    \caption{Smoothed PSD of input and the two outputs\label{fig:PSD3smooth}}
+    \end{center}
+
+\end{figure}
 
 \end{document}
