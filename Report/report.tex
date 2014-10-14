@@ -44,7 +44,7 @@ to demonstrate that the systems are non-LTI.
 \subsection{Study 3 – Special Operations}
 In study 3 we use the filtered noise from study 2 as input to two different systems.
 This gives us output signals for which the PSD is computed theoretically and estimated using
-periodograms, as in study 1. The theoretical and estimated PSD is then compared.
+periodograms. The theoretical and estimated PSD is then compared.
 
 \subsection{Notation}
 The following notations will be used. \\
@@ -86,7 +86,7 @@ The PSD of the filtered WGN is then calculated using equation~\ref{eq:PSDformula
   R_y[\theta] = R_x|H(\theta)|^2;
 \end{equation}
 
-The ACF can be calculated using inverse fourier transform, see equation~\ref{eq:ACFformula}
+The ACF can be calculated using inverse fourier transform, see equation~\ref{eq:ACFformula}.
 
 \begin{equation}
   \label{eq:ACFformula}
@@ -131,7 +131,7 @@ The smoothed periodogram was done by first multiplying the estimated ACF with a
 
  \begin{equation}
  \label{eq:win}
- \hat{R}_{y,smoothed} = \mathcal{F}\{\hat{r}_yw[k]\}
+ \hat{R}_{y,smoothed}[\theta] = \mathcal{F}\{\hat{r}_yw[k]\}
  \end{equation}
 
 
@@ -146,29 +146,29 @@ and equation~\ref{eq:PSDideal}, the close to ideal filter's PSD.
 
 \begin{equation}
   \label{eq:ACFsimple}
-  r_{y,simple} = R_x\frac{(1-a)}{(1+a)}a^{|n|};  |a| < 1
+  r_{y,simple}[n] = R_x\frac{(1-a)}{(1+a)}a^{|n|};  |a| < 1
 \end{equation}
 
 \begin{equation}
   \label{eq:PSDsimple}
-  R_{y,simple} =  R_x|\frac{1-a}{1-ae^{-j2\pi\theta}}|^2;
+  R_{y,simple}[\theta] =  R_x|\frac{1-a}{1-ae^{-j2\pi\theta}}|^2;
 \end{equation}
 
 \begin{equation}
   \label{eq:ACFideal}
-  r_{y,ideal} = R_x2\theta_{0}sinc[n2\theta_0];
+  r_{y,ideal}[n] = R_x2\theta_{0}sinc[n2\theta_0];
 \end{equation}
 
 \begin{equation}
   \label{eq:PSDideal}
-  R_{y,ideal} = R_xrect[\frac{\theta - k}{2\theta_0}]
+  R_{y,ideal}[\theta] = R_xrect[\frac{\theta - k}{2\theta_0}]
 \end{equation}
 
 
 The theoretical functions for the ACF and PSD for $y_{simple}$ are presented
-in figure~\ref{fig:TheoACFsimple} and figure~\ref{fig:TheoPSDsimple}
+in figure~\ref{fig:TheoACFsimple} and figure~\ref{fig:TheoPSDsimple}.
 The functions for $y_{ideal}$ are presented in figure~\ref{fig:TheoACFideal} and
-figure~\ref{fig:TheoPSDideal}
+figure~\ref{fig:TheoPSDideal}.
 
 
 
@@ -348,7 +348,7 @@ need to hold for non-LTI-systems.
 
 
 \subsection{Theoretical PSD}
-The PSD's of our filtered, squared, halfwaverectified and AM-SC modulated signal
+The PSD of our filtered signal is calculated as in study 1 and the PSD formulas for our systems can be found in  \emph{Tables and formulas for signal theory, 2011, Mikael Olofsson}. The PSD's of our filtered, squared, halfwaverectified and AM-SC modulated signal
 are presented in figure~\ref{fig:theoPSD2} aswell as in equation~\ref{eq:PSDfiltsig},~\ref{eq:PSDsq},~\ref{eq:PSDhw}
 and~\ref{eq:PSDam}.
 
@@ -382,26 +382,18 @@ and~\ref{eq:PSDam}.
 
 \end{figure}
 
-\subsection{Method}
-The signal was filtered using a ideal low pass filter. The filtered signal
-is then used as input to the three systems as described in
-equations~\ref{eq:SQsys},~\ref{eq:HWsys} and~\ref{eq:AMsys}.
-The PSD's were estimated by the methods described in Study 1.
-Three histograms of the output signals are used as amplitude distributions
-and then compared to the input distribution.
-
 \subsection{Results and conclusion}
 
 \subsubsection{Periodograms}
 As we can see in figure~\ref{fig:RawPSD2} new frequencies present themselves in
-the non-linear systems compared to in the PSD of input, where we almost perfectly
+the non-linear systems compared to the PSD of input, where we almost perfectly
 have no frequencies between 0.1 and 0.9. All three of the non-linear systems show
 frequencies between 0.1 and 0.9, even if the halfwaverectified signal doesn't do
 so as clearly as the others, and thus contradicts equation~\ref{eq:super}, as can
 be expected. At zero in the squared- and the halfwaverectified-
 signal there is a very large spike. This is a dirac in the theoretical analysis
 of the systems, but when dealing with numerical estimations this spike becomes
-extremely large. The windows yaxis has been set to display the main part of the
+extremely large. The windows y-axis has been set to display the main part of the
 signal instead of accomodating this large spike.
 
 
@@ -415,7 +407,7 @@ signal instead of accomodating this large spike.
 \end{figure}
 
 \subsubsection{Amplitude distribution}
-The input signal, in figure~\ref{fig:hist} is the only signal that is truly gaussian in its distribution,
+The input signal, in figure~\ref{fig:hist}, is the only signal that is truly gaussian in its distribution,
 with the AM-SC histogram having a tendency towards gaussian but seems to have a
 too high peak centered around zero. These results are expected when dealing with
 non-linearities.
@@ -467,9 +459,9 @@ in ~\ref{eq:alt2} and ~\ref{eq:dec2}.
 
 The system in~\ref{eq:alt2} describes the same alternating system as equation~\ref{eq:alt} and
 the system in~\ref{eq:dec2} describes the same decimating system as equation~\ref{eq:dec}.
-By ocular inspection we see that equation~\ref{eq:alt} describes a amplitude modulation with
-suppressed carrier, amplitude constant one and carrier frequency one half. In turn equation~\ref{eq:dec}
-describes a demodulation with amplitude constant one half and carrier frequency one fourth.
+By ocular inspection we see that equation~\ref{eq:alt} describes a amplitude modulation with 
+suppressed carrier, amplitude constant $1$ and carrier frequency $0.5$. In turn equation~\ref{eq:dec}
+describes a demodulation with amplitude constant $0.5$ and carrier frequency $0.25$.
 
 \subsection{Theoretical PSD}
 
@@ -480,6 +472,7 @@ In equation~\ref{eq:PSDalt}, $\theta_c$ will be 0.5, this means that the two
 resulting rectangular functions will overlap. A similar thing happens in
 equation~\ref{eq:PSDdec} as well.
 
+\subsection{Result and conclusion}
 
 \begin{equation}
   \label{eq:RX}
