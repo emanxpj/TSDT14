@@ -44,7 +44,7 @@ to demonstrate that the systems are non-LTI.
 \subsection{Study 3 – Special Operations}
 In study 3 we use the filtered nois from study 2 as input to two different systems.
 This gives us output signals for which the PSD is computed theoretically and estimated using
-periodograms, as in study 1.
+periodograms, as in study 1. The theoretical and estimated PSD is then compared.
 
 \subsection{Notation}
 The following notations will be used. \\
@@ -311,7 +311,7 @@ described in equation~\ref{eq:idealH2} to produce the signal $x$.
 
 This signal, $x$, is then used as input to the three different non-LTI-systems
 described in equation~\ref{eq:SQsys},~\ref{eq:HWsys} and~\ref{eq:AMsys}.
-This gives the output signal $y$.
+This gives the output signals $Y_{sq}$, $Y_{hw}$ and $Y_{am}$.
 
 \begin{equation}
   \label{eq:SQsys}
@@ -431,6 +431,48 @@ non-linearities.
 
 
 \clearpage
+
+\subsection{Study 3 – Special Operations}
+The input signal from study 2, $x$m is used as input signal in this study too. It consists of 
+filtered white Gaussian noise and is used as inputs to systems described in equation ~\ref{eq:alt}
+and ~\ref{eq:dec}. This gives the output signals $Y_{alt}$ and $Y_{dec}$.
+
+\begin{equation}
+  \label{eq:alt}
+  Y[n]_{alt} =X[n](-1)^n
+\end{equation}
+
+\begin{equation}
+  \label{eq:dec}
+  Y[n]_{dec} =
+\begin{cases}
+   X[n],& for~even~n\\
+    0,    & for~odd~n
+\end{cases}
+\end{equation}
+
+\subsection{Realizing the systems}
+In order du calculate the PSD as simply as possible we used cosine to rewrite our systems as described
+in ~\ref{eq:alt2} and ~\ref{eq:dec2}.
+
+\begin{equation}
+  \label{eq:alt2}
+  Y[n]_{alt} =X[n]cos(\pi n)
+\end{equation}
+
+\begin{equation}
+  \label{eq:dec2}
+  Y[n]_{alt} =\frac{1}{2}X[n](1+cos(\pi n))
+\end{equation}
+
+The system in~\ref{eq:alt2} describes the same alternating system as equation~\ref{eq:alt} and
+the system in~\ref{eq:dec2} describes the same decimating system as equation~\ref{eq:dec}.
+By ocular inspection we see that equation~\ref{eq:alt} describes a amplitude modulation with 
+suppressed carrier, amplitude constant one and carrier frequency one half. In turn equation~\ref{eq:dec}
+describes a demodulation with amplitude constant one half and carrier frequency one fourth.
+
+\subsection{Theoretical PSD}
+
 
 
 \end{document}
