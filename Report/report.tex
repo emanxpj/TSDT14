@@ -73,20 +73,20 @@ White Gaussian noise is used in this study. It was filtered through the two
 
 \begin{equation}
   \label{eq:idealH}
-  H[\theta]_{ideal} =rect(\frac{\theta}{2\theta_0} )
+  H[\theta]_{ideal} =rect(\frac{\theta}{2\theta_c} )
 \end{equation}
 
 \subsubsection{Theoretical ACF and PSD}
-PSD of WGN is constant and our WGN has a variance of one. Due to this the PSD
+The PSD of WGN is constant and our WGN has a variance of one. Due to this the PSD
 of our noise, $R_x$, is chosen to one.
 The PSD of the filtered WGN is then calculated using equation~\ref{eq:PSDformula}.
 
 \begin{equation}
   \label{eq:PSDformula}
-  R_y[\theta] = R_x|H(\theta)|^2;
+  R_y[\theta] = R_x|H(\theta)|^2
 \end{equation}
 
-The ACF can be calculated using inverse fourier transform, see equation~\ref{eq:ACFformula}.
+The ACF can be calculated using the inverse fourier transform, see equation~\ref{eq:ACFformula}.
 
 \begin{equation}
   \label{eq:ACFformula}
@@ -151,17 +151,17 @@ and equation~\ref{eq:PSDideal}, the close to ideal filter's PSD.
 
 \begin{equation}
   \label{eq:PSDsimple}
-  R_{y,simple}[\theta] =  R_x|\frac{1-a}{1-ae^{-j2\pi\theta}}|^2;
+  R_{y,simple}[\theta] =  R_x|\frac{1-a}{1-ae^{-j2\pi\theta}}|^2
 \end{equation}
 
 \begin{equation}
   \label{eq:ACFideal}
-  r_{y,ideal}[n] = R_x2\theta_{0}sinc[n2\theta_0];
+  r_{y,ideal}[n] = R_x2\theta_csinc[n2\theta_c]
 \end{equation}
 
 \begin{equation}
   \label{eq:PSDideal}
-  R_{y,ideal}[\theta] = R_xrect[\frac{\theta - k}{2\theta_0}]
+  R_{y,ideal}[\theta] = R_xrect[\frac{\theta - k}{2\theta_c}]
 \end{equation}
 
 
@@ -214,14 +214,14 @@ figure~\ref{fig:TheoPSDideal}.
 \subsubsection{ACF estimation}
 
 ACF estimations, of the signal filtered through the simple filter, using Blackman-
-Turkey’s and Barlett’s-estimate are shown in figure~\ref{fig:ACFest}. The estimations of the signal
+Tukey’s and Barlett’s-estimate are shown in figure~\ref{fig:ACFest}. The estimations of the signal
 filtered through the near ideal filter are shown in figure~\ref{fig:BACFest}.
 By examining the pictures you see the difference between the theoretical ACF and
 the estimated ACF for both filters. The theoretical ACF tends to zero for higher k
-while both Blackman-Turkey’s and Barlett’s-estimate are non-zero for higher k. This is
-due to the fact that both Blackman-Turkey’s and Barlett’s-estimate have variances not
+while both Blackman-Tukey’s and Barlett’s-estimate are non-zero for higher k. This is
+due to the fact that both Blackman-Tukey’s and Barlett’s-estimate have variances not
 tending to zero for higher k. You can also see that Barlett’s estimate is slightly better
-than Blackman-Turkey’s. \\
+than Blackman-Tukey’s. \\
 
 
 \begin{figure}[!hp]
@@ -349,7 +349,7 @@ need to hold for non-LTI-systems.
 
 \subsection{Theoretical PSD}
 The PSD of our filtered signal is calculated as in study 1 and the PSD formulas for our systems can be found in  \emph{Tables and formulas for signal theory, 2011, Mikael Olofsson}. The PSD's of our filtered, squared, halfwaverectified and AM-SC modulated signal
-are presented in figure~\ref{fig:theoPSD2} aswell as in equation~\ref{eq:PSDfiltsig},~\ref{eq:PSDsq},~\ref{eq:PSDhw}
+are presented in figure~\ref{fig:theoPSD2} as well as in equation~\ref{eq:PSDfiltsig},~\ref{eq:PSDsq},~\ref{eq:PSDhw}
 and~\ref{eq:PSDam}.
 
 \begin{equation}
@@ -466,19 +466,19 @@ This equation
 
 \begin{equation}
   \label{eq:RX}
-  R_{X} = rect(\frac{\theta}{2\theta_0} )
+  R_{X} = rect(\frac{\theta}{2\theta_c} )
 \end{equation}
 
 \begin{equation}
   \label{eq:PSDalt}
-  R_{alt} = \frac{1}{4}(R_X(\theta+\theta_c) + R_X(\theta-\theta_c)) = \Bigg/ \theta_c = \frac{1}{2} \Bigg/ = \frac{1}{2}(R_X(\theta-\frac{1}{2}))
+  R_{alt} = \frac{1}{4}(R_X(\theta+\Omega_0) + R_X(\theta-\Omega_0)) = \Bigg/ \Omega_0 = \frac{1}{2} \Bigg/ = \frac{1}{2}(R_X(\theta-\frac{1}{2}))
 \end{equation}
 
 \begin{align}
   \label{eq:PSDdec}
-  R_{dec} & = \frac{1}{2^2}R_X(\theta) + \frac{1}{2^2}\frac{1}{4}(R_X(\theta+2\theta_c)
-  + R_X(\theta-2\theta_c)) \\
-   & = \Bigg/ \theta_c  = \frac{1}{4} \Bigg/ = \nonumber
+  R_{dec} & = \frac{1}{2^2}R_X(\theta) + \frac{1}{2^2}\frac{1}{4}(R_X(\theta+2\Omega_0)
+  + R_X(\theta-2\Omega_0)) \\
+   & = \Bigg/ \Omega_0  = \frac{1}{4} \Bigg/ = \nonumber
    \frac{1}{4}R_X(\theta) + \frac{1}{8}R_X(\theta-\frac{1}{2})
 \end{align}
 
