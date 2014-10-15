@@ -443,34 +443,24 @@ and ~\ref{eq:dec}. This gives the output signals $Y_{alt}$ and $Y_{dec}$.
 \end{cases}
 \end{equation}
 
-\subsection{Realizing the systems}
-In order du calculate the PSD as simply as possible we used cosine to rewrite our systems as described
-in ~\ref{eq:alt2} and ~\ref{eq:dec2}.
-
-\begin{equation}
-  \label{eq:alt2}
-  Y[n]_{alt} =X[n]cos(\pi n)
-\end{equation}
-
-\begin{equation}
-  \label{eq:dec2}
-  Y[n]_{dec} =\frac{1}{2}X[n](1+cos(\pi n))
-\end{equation}
-
-The system in~\ref{eq:alt2} describes the same alternating system as equation~\ref{eq:alt} and
-the system in~\ref{eq:dec2} describes the same decimating system as equation~\ref{eq:dec}.
-By ocular inspection we see that equation~\ref{eq:alt} describes a amplitude modulation with 
-suppressed carrier, amplitude constant $1$ and carrier frequency $0.5$. In turn equation~\ref{eq:dec}
-describes a demodulation with amplitude constant $0.5$ and carrier frequency $0.25$.
-
 \subsection{Theoretical PSD}
+The theoretical PSD:s are calculated using equation~\ref{eq:theoreticalPSD}.
 
-Since the systems can be described as a modulation and demodulation the corresponding equations
-for the PSD's can be found in \emph{Signal Theory, 2011, Mikael Olofsson}. This gives us the
-equations~\ref{eq:PSDalt} and~\ref{eq:PSDdec}. Where $R_X$ can be found in equation~\ref{eq:RX}.
-In equation~\ref{eq:PSDalt}, $\theta_c$ will be 0.5, this means that the two
-resulting rectangular functions will overlap. A similar thing happens in
-equation~\ref{eq:PSDdec} as well.
+\begin{equation}
+  \label{eq:theoreticalPSD.}
+  r_{Y}[k] = E{Y[n+k]Y[n]}
+\end{equation}
+
+This equation
+
+\begin{align}
+  \label{eq:theoreticalPSDalt}
+  r_{alt}[k] = E{(X[n+k](-1)^{n+k})(X[n](-1)^n)}\\
+  =E{X[n+k]X[n]}E{(-1)^{n+k}(-1)^n}\\
+  =E{X[n+k]X[n]}E{(-1)^{2n+k}}\\
+  =E{X[n+k]X[n]}E{(-1)^k}\\
+  =E{X[n+k]X[n]}(-1)^k\\
+\end{align}
 
 \subsection{Result and conclusion}
 
