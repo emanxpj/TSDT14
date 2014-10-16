@@ -433,7 +433,7 @@ non-linearities.
 \clearpage
 
 \section{Study 3 – Special Operations}
-The input signal from study 2, $x$m is used as input signal in this study too. It consists of
+The input signal from study 2, $x$, is used as input signal in this study too. It consists of
 filtered white Gaussian noise and is used as inputs to systems described in equation ~\ref{eq:alt}
 and ~\ref{eq:dec}. This gives the output signals $Y_{alt}$ and $Y_{dec}$.
 
@@ -499,7 +499,7 @@ calculated ACF, this is presented in equation~\ref{eq:theoPSDdec}.
 \begin{align}
   \label{eq:theoPSDdec}
   R_{dec}[\theta] & = \mathcal{F}\{r_{dec}[k]\} \nonumber \\
-  & = \frac{1}{4}(R_X[\theta]+R_X[\theta-0.5] \nonumber \\
+  & = \frac{1}{4}(R_X[\theta]+R_X[\theta-0.5]) \nonumber \\
   & = \frac{1}{4}(rect(\frac{\theta-0.5}{2\theta_c}) + rect(\frac{\theta}{2\theta_c}))
 \end{align}
 
@@ -507,7 +507,7 @@ calculated ACF, this is presented in equation~\ref{eq:theoPSDdec}.
 
 As we can see in figure~\ref{fig:PSD3} the estimated PSD's are approximated
 quite nicely, this effect is even more clearly visible when the PSD's are smoothed
-with a Blackman-Harris window of size 65 as we can see in figure~\ref{fig:PSD3smooth}
+with a Blackman-Harris window of size 65 as we can see in figure~\ref{fig:PSD3smooth}.
 At first we considered modeling the two systems as a modulation and a demodulation,
 this will not work due to the random phase that needs to be taken into account so
  that the signal is WSS. This was quickly noticed in Matlab with the estimator
