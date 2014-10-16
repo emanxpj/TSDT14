@@ -348,7 +348,10 @@ need to hold for non-LTI-systems.
 
 
 \subsection{Theoretical PSD}
-The PSD of our filtered signal is calculated as in study 1 and the PSD formulas for our systems can be found in  \emph{Tables and formulas for signal theory, 2011, Mikael Olofsson}. The PSD's of our filtered, squared, halfwaverectified and AM-SC modulated signal
+The PSD of our filtered signal is calculated as in study 1 and the PSD formulas
+for our systems can be found in  \emph{Tables and formulas for signal theory,
+2011, Mikael Olofsson}. The PSD's of our filtered, squared, halfwaverectified
+and AM-SC modulated signal
 are presented in figure~\ref{fig:theoPSD2} as well as in equation~\ref{eq:PSDfiltsig},~\ref{eq:PSDsq},~\ref{eq:PSDhw}
 and~\ref{eq:PSDam}.
 
@@ -444,53 +447,67 @@ and ~\ref{eq:dec}. This gives the output signals $Y_{alt}$ and $Y_{dec}$.
 \end{equation}
 
 \subsection{Theoretical PSD}
-The theoretical PSD:s are calculated using equation~\ref{eq:theoreticalPSD}.
+The theoretical PSDs are calculated by taking the fouriertransform of the theoretical
+ACF which is calculated in accordance to equation~\ref{eq:theoACF}.
+For the alternating system the ACF is calculated as in equation~\ref{eq:theoACFalt}
 
 \begin{equation}
-  \label{eq:theoreticalPSD.}
-  r_{Y}[k] = E{Y[n+k]Y[n]}
-\end{equation}
-
-This equation
-
-\begin{align}
-  \label{eq:theoreticalPSDalt}
-  r_{alt}[k] = E{(X[n+k](-1)^{n+k})(X[n](-1)^n)}\\
-  =E{X[n+k]X[n]}E{(-1)^{n+k}(-1)^n}\\
-  =E{X[n+k]X[n]}E{(-1)^{2n+k}}\\
-  =E{X[n+k]X[n]}E{(-1)^k}\\
-  =E{X[n+k]X[n]}(-1)^k\\
-\end{align}
-
-\subsection{Result and conclusion}
-
-\begin{equation}
-  \label{eq:RX}
-  R_{X} = rect(\frac{\theta}{2\theta_c} )
-\end{equation}
-
-\begin{equation}
-  \label{eq:PSDalt}
-  R_{alt} = \frac{1}{4}(R_X(\theta+\Omega_0) + R_X(\theta-\Omega_0)) = \Bigg/ \Omega_0 = \frac{1}{2} \Bigg/ = \frac{1}{2}(R_X(\theta-\frac{1}{2}))
+  \label{eq:theoACF}
+  r_Y[k] = E\{Y[n+k]Y[n]\}
 \end{equation}
 
 \begin{align}
-  \label{eq:PSDdec}
-  R_{dec} & = \frac{1}{2^2}R_X(\theta) + \frac{1}{2^2}\frac{1}{4}(R_X(\theta+2\Omega_0)
-  + R_X(\theta-2\Omega_0)) \\
-   & = \Bigg/ \Omega_0  = \frac{1}{4} \Bigg/ = \nonumber
-   \frac{1}{4}R_X(\theta) + \frac{1}{8}R_X(\theta-\frac{1}{2})
+  \label{eq:theoACFalt}
+  r_{alt}[k] & = E\{X[n+k](-1)^{n+k}X[n](-1)^n\}\nonumber \\
+  & =E\{X[n+k]X[n]\}E\{(-1)^{n+k}(-1)^n\}\nonumber \\
+  & =E\{X[n+k]X[n]\}E\{(-1)^{2n+k}\}\nonumber \\
+  & =E\{X[n+k]X[n]\}E\{(-1)^k\}\nonumber \\
+  & =E\{X[n+k]X[n]\}(-1)^k\nonumber \\
+  & =r_X[k](-1)^k
 \end{align}
 
+\begin{align}
+  \label{eq:theoPSDalt}
+  R_{alt}[\theta] & = \mathcal{F}\{r_{alt}[k]\} \nonumber \\
+  & = R_X[\theta-0.5] = rect(\frac{\theta-0.5}{2\theta_c})
+\end{align}
+
+For the decimator a bit more math is involved to ensure that the signal is wide
+sense stationary and the PSD well defined. To ensure this a variable $\chi$ discretely
+uniformly distributed over 0 and 1 is introduced, this is in analogy with the analysis
+ of modulated signals in \emph{Tables and formulas for signal theory,
+ 2011, Mikael Olofsson} on page 180.
+
+\begin{align}
+  \label{eq:theoACFdec}
+  r_{dec}[k] & = E\{X[n+k]\frac{1+(-1)^{n+k+\chi}}{2}X[n]\frac{1+(-1)^{n+\chi}}{2}\}\nonumber \\
+  & =\frac{1}{4}E\{X[n+k]X[n]\}E\{1+(-1)^{2(n+\chi)+k}+(-1)^{n+k+\chi}(-1)^{n+\chi}\}\nonumber \\
+  & =\Bigg/ \sum_{\chi = 0}^1 (-1)^{n+k+\chi}(-1)^{n+\chi} = 0   \Bigg/ = \nonumber \\
+  & =\frac{1}{4}E\{X[n+k]X[n]\}E\{1+(-1)^{2(n+\chi)+k}\}\nonumber \\
+  & =\frac{1}{4}E\{X[n+k]X[n]\}E\{1+(-1)^k\}\nonumber \\
+  & =\frac{1}{4}r_X[k](1+(-1)^k)
+\end{align}
+
+From here we once again calculate the PSD by taking the fouriertransform of the
+calculated ACF, this is presented in equation~\ref{eq:theoPSDdec}.
+
+\begin{align}
+  \label{eq:theoPSDdec}
+  R_{dec}[\theta] & = \mathcal{F}\{r_{dec}[k]\} \nonumber \\
+  & = \frac{1}{4}(R_X[\theta]+R_X[\theta-0.5] \nonumber \\
+  & = \frac{1}{4}(rect(\frac{\theta-0.5}{2\theta_c}) + rect(\frac{\theta}{2\theta_c}))
+\end{align}
 
 \subsection{Results and conclusion}
 
 As we can see in figure~\ref{fig:PSD3} the estimated PSD's are approximated
 quite nicely, this effect is even more clearly visible when the PSD's are smoothed
 with a Blackman-Harris window of size 65 as we can see in figure~\ref{fig:PSD3smooth}
-It's interesting to note that a alternating sampling of a signal corresponds to
-a amplitude modulation with suppressed carrier and that a decimation can be seen
-as the demodulation with scaled amplitude.
+At first we considered modeling the two systems as a modulation and a demodulation,
+this will not work due to the random phase that needs to be taken into account so
+ that the signal is WSS. This was quickly noticed in Matlab with the estimator
+ functions. Estimators are a strong tool to show errors in theoretical calculations
+  and to analyze systems that are very complex theoretically.
 
 \begin{figure}[!hp]
 
