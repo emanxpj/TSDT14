@@ -2,7 +2,7 @@ clear;
 clc;
 close all;
 
-N = 2^12;
+N = 2^16;
 Ts = 1; %length of the measured signal.
 fs = N/Ts; %sampling frequency.
 T = Ts/N; %sampling length.

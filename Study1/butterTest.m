@@ -1,4 +1,8 @@
-N = 2^12;
+close all; 
+clear;
+clc;
+
+N = 2^16;
 N2 = N+1;
 Ts = 1; %length of the measured signal.
 fs = N/Ts; %sampling frequency.
@@ -52,7 +56,7 @@ w = linspace(0,1,N);
 w2 = window(@blackmanharris,65);
 w3 = window(@triang,65);
 RyMy2 = windowing2(ryMy2,65, w2);
-RyMy3 = PerAv(RyMy1,p);
+RyMy3 = PerAv(y,p);
 RyMyTri = windowing2(ryMy2,65,w3);
 
 Ryt1 = Ryt1([N/2+1:N 1:N/2]);

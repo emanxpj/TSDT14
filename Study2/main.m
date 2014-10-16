@@ -9,7 +9,7 @@ clc;
 
 % Triangel 
 
-N = 2^12;
+N = 2^16;
 
 Ts = 1; %length of the measured signal.
 fs = N/Ts; %sampling frequency.
